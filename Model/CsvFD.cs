@@ -13,5 +13,6 @@ namespace ImssAnalysis.Model
         public string NombreCompania { get; set; }
         public string FechaIngreso { get; set; }
         public string FechaEgreso { get; set; }
+		public string UsuarioRegistro { get; set; }
     }
 }
