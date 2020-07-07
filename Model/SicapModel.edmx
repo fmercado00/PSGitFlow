@@ -1,0 +1,2522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ESEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administradores">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="Nivel" Type="int" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CartaIndividual">
+          <Key>
+            <PropertyRef Name="IdCartaIndividual" />
+          </Key>
+          <Property Name="IdCartaIndividual" Type="int" Nullable="false" />
+          <Property Name="IdRegistroPatronal" Type="int" />
+          <Property Name="FechaIngreso" Type="date" />
+          <Property Name="FechaEgreso" Type="date" />
+        </EntityType>
+        <EntityType Name="Contactos">
+          <Key>
+            <PropertyRef Name="IdContacto" />
+          </Key>
+          <Property Name="IdContacto" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" />
+          <Property Name="Email" Type="varchar" MaxLength="200" />
+          <Property Name="Telefono" Type="varchar" MaxLength="15" />
+          <Property Name="Puesto" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="RazonSocial" Type="varchar" MaxLength="250" />
+          <Property Name="CodigoRegistro" Type="varchar" MaxLength="50" />
+          <Property Name="IdEstatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmpresasFacturar">
+          <Key>
+            <PropertyRef Name="IdEmpresaFacturar" />
+          </Key>
+          <Property Name="IdEmpresaFacturar" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" />
+          <Property Name="RFC" Type="char" MaxLength="14" />
+          <Property Name="UsoCFDI" Type="varchar" MaxLength="150" />
+          <Property Name="MetodoPago" Type="varchar" MaxLength="150" />
+          <Property Name="IdEmpresa" Type="int" />
+        </EntityType>
+        <EntityType Name="Estatus">
+          <Key>
+            <PropertyRef Name="IdEstatus" />
+          </Key>
+          <Property Name="IdEstatus" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Imss">
+          <Key>
+            <PropertyRef Name="IdImss" />
+          </Key>
+          <Property Name="IdImss" Type="int" Nullable="false" />
+          <Property Name="IdRegistroPatronal" Type="int" />
+          <Property Name="ReportadoPorCandidato" Type="tinyint" />
+          <Property Name="NombreDioReferencias" Type="varchar" MaxLength="250" />
+          <Property Name="PuestoDeQuienDioReferencias" Type="varchar" MaxLength="250" />
+          <Property Name="TelefonoDeQuienDioReferencias" Type="varchar" MaxLength="20" />
+          <Property Name="EmailDeQuienDioReferencias" Type="varchar" MaxLength="250" />
+          <Property Name="MotivoSalida" Type="varchar" MaxLength="500" />
+          <Property Name="PuestoInicial" Type="varchar" MaxLength="250" />
+          <Property Name="PuestoFinal" Type="varchar" MaxLength="250" />
+          <Property Name="Referencia" Type="varchar" MaxLength="2000" />
+          <Property Name="PertenecioSindicato" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Parametros">
+          <Key>
+            <PropertyRef Name="IdParametro" />
+          </Key>
+          <Property Name="IdParametro" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="HoraCorteAtencion" Type="time" Precision="7" />
+          <Property Name="CorreoParaEnvio" Type="varchar" MaxLength="150" />
+          <Property Name="CorreoContrasena" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="4000" />
+          <Property Name="IdEstatus" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ESE.dbo.ProductosEmpresas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProductosEmpresas">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="14" Scale="2" />
+        </EntityType>
+        <EntityType Name="ReferenciasLaborales">
+          <Key>
+            <PropertyRef Name="IdReferenciaLaboral" />
+          </Key>
+          <Property Name="IdReferenciaLaboral" Type="int" Nullable="false" />
+          <Property Name="EstadoCivil" Type="char" MaxLength="10" />
+          <Property Name="FechaAnteriorIngreso" Type="date" />
+          <Property Name="FamiliaenEmpresa" Type="char" MaxLength="50" />
+          <Property Name="Observaciones" Type="ntext" />
+          <Property Name="IdSolicitud" Type="int" />
+          <Property Name="FechaAnteriorEgreso" Type="date" />
+          <Property Name="TrabajoAntesEmpresa" Type="char" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="ReferenciasLaboralesD">
+          <Key>
+            <PropertyRef Name="IdReferenciaLaboralD" />
+          </Key>
+          <Property Name="IdReferenciaLaboralD" Type="int" Nullable="false" />
+          <Property Name="IdReferenciaLaboral" Type="int" />
+          <Property Name="NombreEmpresa" Type="varchar" MaxLength="250" />
+          <Property Name="Sucursal" Type="varchar" MaxLength="250" />
+          <Property Name="Outsourcing" Type="varchar" MaxLength="250" />
+          <Property Name="MarcaAsignada" Type="varchar" MaxLength="250" />
+          <Property Name="GiroEmpresa" Type="varchar" MaxLength="50" />
+          <Property Name="DomicilioLaboral" Type="varchar" MaxLength="250" />
+          <Property Name="PuestoDesempeñado" Type="varchar" MaxLength="50" />
+          <Property Name="FechaIngreso" Type="date" />
+          <Property Name="FechaEgreso" Type="date" />
+          <Property Name="MotivoSalida" Type="varchar" MaxLength="250" />
+          <Property Name="CartaRecomendacion" Type="varchar" MaxLength="250" />
+          <Property Name="JefeInmediato" Type="varchar" MaxLength="250" />
+          <Property Name="Telefonos" Type="varchar" MaxLength="50" />
+          <Property Name="Observaciones" Type="ntext" />
+        </EntityType>
+        <EntityType Name="RegistrosPatronales">
+          <Key>
+            <PropertyRef Name="IdRegistroPatronal" />
+          </Key>
+          <Property Name="IdRegistroPatronal" Type="int" Nullable="false" />
+          <Property Name="IdSolicitud" Type="int" Nullable="false" />
+          <Property Name="RegistroPatronal" Type="varchar" MaxLength="50" />
+          <Property Name="NombreCompania" Type="varchar" MaxLength="600" />
+        </EntityType>
+        <EntityType Name="Solicitudes">
+          <Key>
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdSolicitud" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" />
+          <Property Name="Nombres" Type="varchar" MaxLength="150" />
+          <Property Name="ApellidoPatermo" Type="varchar" MaxLength="150" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="150" />
+          <Property Name="Puesto" Type="varchar" MaxLength="150" />
+          <Property Name="FechaNacimiento" Type="date" />
+          <Property Name="LugarNacimiento" Type="varchar" MaxLength="150" />
+          <Property Name="CURP" Type="varchar" MaxLength="50" />
+          <Property Name="IMSS" Type="varchar" MaxLength="150" />
+          <Property Name="TelefonoCelular" Type="varchar" MaxLength="20" />
+          <Property Name="TelefonoCasa" Type="varchar" MaxLength="20" />
+          <Property Name="TelefonoRecados" Type="varchar" MaxLength="20" />
+          <Property Name="Calle" Type="varchar" MaxLength="150" />
+          <Property Name="NumExterior" Type="varchar" MaxLength="10" />
+          <Property Name="NumInterior" Type="varchar" MaxLength="10" />
+          <Property Name="Colonia" Type="varchar" MaxLength="150" />
+          <Property Name="CodigoPostal" Type="varchar" MaxLength="6" />
+          <Property Name="AlcaldiaMunicipio" Type="varchar" MaxLength="150" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="150" />
+          <Property Name="IdEmpresaFacturar" Type="int" />
+          <Property Name="IdProducto" Type="int" />
+          <Property Name="UploadFileName" Type="varchar" MaxLength="255" />
+          <Property Name="FechaCaptura" Type="datetime" />
+          <Property Name="FechaAtencion" Type="date" />
+          <Property Name="IdUsuarioRegistro" Type="int" />
+          <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="IdStatus" Type="int" />
+          <Property Name="ImssFile" Type="varchar" MaxLength="256" />
+          <Property Name="emailCandidato" Type="varchar" MaxLength="250" />
+          <Property Name="observaciones" Type="varchar" MaxLength="4000" />
+          <Property Name="SolicitadoPor" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="sexo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="FaceBook" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Instagram" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Twitter" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="SueldoAspirado" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TiempoEstimadoTraslado" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SolicitudesArchivos">
+          <Key>
+            <PropertyRef Name="IdSolicitudArchivo" />
+          </Key>
+          <Property Name="IdSolicitudArchivo" Type="int" Nullable="false" />
+          <Property Name="IdSolicitud" Type="int" />
+          <Property Name="AvisoPrivacidad" Type="varchar" MaxLength="255" />
+          <Property Name="INE" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" />
+          <Property Name="idEmpresa" Type="int" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="250" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+          <Property Name="IdEstatus" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ESE.dbo.vCartaIndividual' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vCartaIndividual">
+          <Key>
+            <PropertyRef Name="IdCartaIndividual" />
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdCartaIndividual" Type="int" Nullable="false" />
+          <Property Name="IdRegistroPatronal" Type="int" />
+          <Property Name="RegistroPatronal" Type="varchar" MaxLength="50" />
+          <Property Name="NombreCompania" Type="varchar" MaxLength="600" />
+          <Property Name="FechaIngreso" Type="varchar" MaxLength="50" />
+          <Property Name="FechaEgreso" Type="varchar" MaxLength="50" />
+          <Property Name="IdSolicitud" Type="int" Nullable="false" />
+          <Property Name="DFechaIngreso" Type="date" />
+          <Property Name="DFechaEgreso" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ESE.dbo.vContactos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vContactos">
+          <Key>
+            <PropertyRef Name="IdContacto" />
+          </Key>
+          <Property Name="IdContacto" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" />
+          <Property Name="RazonSocial" Type="varchar" MaxLength="250" />
+          <Property Name="Email" Type="varchar" MaxLength="200" />
+          <Property Name="Telefono" Type="varchar" MaxLength="15" />
+          <Property Name="Puesto" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ESE.dbo.vEmpresas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vEmpresas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEstatus" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="RazonSocial" Type="varchar" MaxLength="250" />
+          <Property Name="CodigoRegistro" Type="varchar" MaxLength="50" />
+          <Property Name="IdEstatus" Type="int" Nullable="false" />
+          <Property Name="Estatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ESE.dbo.vEmpresasFacturar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vEmpresasFacturar">
+          <Key>
+            <PropertyRef Name="IdEmpresaFacturar" />
+          </Key>
+          <Property Name="IdEmpresaFacturar" Type="int" Nullable="false" />
+          <Property Name="NombreComercial" Type="varchar" MaxLength="250" />
+          <Property Name="RazonSocial" Type="varchar" MaxLength="250" />
+          <Property Name="RFC" Type="char" MaxLength="14" />
+          <Property Name="IdEmpresa" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ESE.dbo.vProductos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vProductos">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="4000" />
+          <Property Name="IdEstatus" Type="int" />
+          <Property Name="Estatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ESE.dbo.vProductosEmpresas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vProductosEmpresas">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" />
+          <Property Name="RazonSocial" Type="varchar" MaxLength="250" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="14" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ESE.dbo.vReferenciasLaborales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vReferenciasLaborales">
+          <Key>
+            <PropertyRef Name="IdReferenciaLaboral" />
+            <PropertyRef Name="IdReferenciaLaboralD" />
+          </Key>
+          <Property Name="IdReferenciaLaboral" Type="int" Nullable="false" />
+          <Property Name="EstadoCivil" Type="char" MaxLength="10" />
+          <Property Name="FechaAnteriorIngreso" Type="date" />
+          <Property Name="FamiliaenEmpresa" Type="char" MaxLength="50" />
+          <Property Name="Observaciones" Type="ntext" />
+          <Property Name="IdSolicitud" Type="int" />
+          <Property Name="FechaAnteriorEgreso" Type="date" />
+          <Property Name="Nombre" Type="varchar" MaxLength="452" />
+          <Property Name="TrabajoAntesEmpresa" Type="char" MaxLength="5" />
+          <Property Name="IdReferenciaLaboralD" Type="int" Nullable="false" />
+          <Property Name="NombreEmpresa" Type="varchar" MaxLength="250" />
+          <Property Name="Sucursal" Type="varchar" MaxLength="250" />
+          <Property Name="Outsourcing" Type="varchar" MaxLength="250" />
+          <Property Name="GiroEmpresa" Type="varchar" MaxLength="50" />
+          <Property Name="MarcaAsignada" Type="varchar" MaxLength="250" />
+          <Property Name="DomicilioLaboral" Type="varchar" MaxLength="250" />
+          <Property Name="PuestoDesempeñado" Type="varchar" MaxLength="50" />
+          <Property Name="FechaIngreso" Type="date" />
+          <Property Name="FechaEgreso" Type="date" />
+          <Property Name="MotivoSalida" Type="varchar" MaxLength="250" />
+          <Property Name="CartaRecomendacion" Type="varchar" MaxLength="250" />
+          <Property Name="JefeInmediato" Type="varchar" MaxLength="250" />
+          <Property Name="Telefonos" Type="varchar" MaxLength="50" />
+          <Property Name="ObservacionesD" Type="ntext" />
+          <Property Name="Puesto" Type="varchar" MaxLength="150" />
+          <Property Name="FechaNacimiento" Type="date" />
+          <Property Name="LugarNacimiento" Type="varchar" MaxLength="150" />
+          <Property Name="CURP" Type="varchar" MaxLength="50" />
+          <Property Name="IMSS" Type="varchar" MaxLength="150" />
+          <Property Name="TelefonoCelular" Type="varchar" MaxLength="20" />
+          <Property Name="TelefonoCasa" Type="varchar" MaxLength="20" />
+          <Property Name="NumExterior" Type="varchar" MaxLength="10" />
+          <Property Name="NumInterior" Type="varchar" MaxLength="10" />
+          <Property Name="Colonia" Type="varchar" MaxLength="150" />
+          <Property Name="Calle" Type="varchar" MaxLength="150" />
+          <Property Name="CodigoPostal" Type="varchar" MaxLength="6" />
+          <Property Name="AlcaldiaMunicipio" Type="varchar" MaxLength="150" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="150" />
+          <Property Name="emailCandidato" Type="varchar" MaxLength="250" />
+          <Property Name="Nombre Empresa a Laborar" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ESE.dbo.vReferenciasLaboralesD' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vReferenciasLaboralesD">
+          <Key>
+            <PropertyRef Name="IdReferenciaLaboralD" />
+          </Key>
+          <Property Name="IdReferenciaLaboralD" Type="int" Nullable="false" />
+          <Property Name="IdReferenciaLaboral" Type="int" />
+          <Property Name="NombreEmpresa" Type="varchar" MaxLength="250" />
+          <Property Name="Sucursal" Type="varchar" MaxLength="250" />
+          <Property Name="Outsourcing" Type="varchar" MaxLength="250" />
+          <Property Name="MarcaAsignada" Type="varchar" MaxLength="250" />
+          <Property Name="GiroEmpresa" Type="varchar" MaxLength="50" />
+          <Property Name="DomicilioLaboral" Type="varchar" MaxLength="250" />
+          <Property Name="PuestoDesempeñado" Type="varchar" MaxLength="50" />
+          <Property Name="FechaIngreso" Type="date" />
+          <Property Name="FechaEgreso" Type="date" />
+          <Property Name="MotivoSalida" Type="varchar" MaxLength="250" />
+          <Property Name="CartaRecomendacion" Type="varchar" MaxLength="250" />
+          <Property Name="JefeInmediato" Type="varchar" MaxLength="250" />
+          <Property Name="Telefonos" Type="varchar" MaxLength="50" />
+          <Property Name="Observaciones" Type="ntext" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ESE.dbo.vRegistrosPatronales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vRegistrosPatronales">
+          <Key>
+            <PropertyRef Name="IdRegistroPatronal" />
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdRegistroPatronal" Type="int" Nullable="false" />
+          <Property Name="IdSolicitud" Type="int" Nullable="false" />
+          <Property Name="RegistroPatronal" Type="varchar" MaxLength="50" />
+          <Property Name="NombreCompania" Type="varchar" MaxLength="600" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ESE.dbo.vSolicitudes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vSolicitudes">
+          <Key>
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdSolicitud" Type="int" Nullable="false" />
+          <Property Name="Candidato" Type="varchar" MaxLength="452" />
+          <Property Name="Puesto" Type="varchar" MaxLength="150" />
+          <Property Name="NombreComercial" Type="varchar" MaxLength="250" />
+          <Property Name="FechaCaptura" Type="varchar" MaxLength="50" />
+          <Property Name="FechaAtencion" Type="varchar" MaxLength="50" />
+          <Property Name="CURP" Type="varchar" MaxLength="50" />
+          <Property Name="IMSS" Type="varchar" MaxLength="150" />
+          <Property Name="ImssFile" Type="varchar" MaxLength="256" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" />
+          <Property Name="emailCandidato" Type="varchar" MaxLength="250" />
+          <Property Name="Estatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ESE.dbo.vUsuarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vUsuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" />
+          <Property Name="idEmpresa" Type="int" />
+          <Property Name="RazonSocial" Type="varchar" MaxLength="250" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="250" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+          <Property Name="Estatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Administradores_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+          <End Role="Administradores" Type="Self.Administradores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Administradores">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Administradores_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Administradores" Type="Self.Administradores" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Administradores">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartaIndividual_RegistrosPatronales">
+          <End Role="RegistrosPatronales" Type="Self.RegistrosPatronales" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CartaIndividual" Type="Self.CartaIndividual" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegistrosPatronales">
+              <PropertyRef Name="IdRegistroPatronal" />
+            </Principal>
+            <Dependent Role="CartaIndividual">
+              <PropertyRef Name="IdRegistroPatronal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contactos_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Contactos" Type="Self.Contactos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Contactos">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresas_Estatus">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="1" />
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
+            </Principal>
+            <Dependent Role="Empresas">
+              <PropertyRef Name="IdEstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpresasFacturar_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="EmpresasFacturar" Type="Self.EmpresasFacturar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="EmpresasFacturar">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Imss_RegistrosPatronales">
+          <End Role="RegistrosPatronales" Type="Self.RegistrosPatronales" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Imss" Type="Self.Imss" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegistrosPatronales">
+              <PropertyRef Name="IdRegistroPatronal" />
+            </Principal>
+            <Dependent Role="Imss">
+              <PropertyRef Name="IdRegistroPatronal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Productos_Estatus">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="IdEstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductosEmpresas_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+          <End Role="ProductosEmpresas" Type="Self.ProductosEmpresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="ProductosEmpresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductosEmpresas_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="ProductosEmpresas" Type="Self.ProductosEmpresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="ProductosEmpresas">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReferenciasLaborales_Solicitudes">
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="0..1" />
+          <End Role="ReferenciasLaborales" Type="Self.ReferenciasLaborales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitudes">
+              <PropertyRef Name="IdSolicitud" />
+            </Principal>
+            <Dependent Role="ReferenciasLaborales">
+              <PropertyRef Name="IdSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReferenciasLaboralesD_ReferenciasLaborales">
+          <End Role="ReferenciasLaborales" Type="Self.ReferenciasLaborales" Multiplicity="0..1" />
+          <End Role="ReferenciasLaboralesD" Type="Self.ReferenciasLaboralesD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReferenciasLaborales">
+              <PropertyRef Name="IdReferenciaLaboral" />
+            </Principal>
+            <Dependent Role="ReferenciasLaboralesD">
+              <PropertyRef Name="IdReferenciaLaboral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrosPatronales_Solicitudes">
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="1" />
+          <End Role="RegistrosPatronales" Type="Self.RegistrosPatronales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitudes">
+              <PropertyRef Name="IdSolicitud" />
+            </Principal>
+            <Dependent Role="RegistrosPatronales">
+              <PropertyRef Name="IdSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_EmpresasFacturar">
+          <End Role="EmpresasFacturar" Type="Self.EmpresasFacturar" Multiplicity="0..1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpresasFacturar">
+              <PropertyRef Name="IdEmpresaFacturar" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdEmpresaFacturar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Estatus">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudesArchivos_Solicitudes">
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="0..1" />
+          <End Role="SolicitudesArchivos" Type="Self.SolicitudesArchivos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitudes">
+              <PropertyRef Name="IdSolicitud" />
+            </Principal>
+            <Dependent Role="SolicitudesArchivos">
+              <PropertyRef Name="IdSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="idEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Estatus">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IdEstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="pActualizaAdministradores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="Nivel" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="pActualizaCRFile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdReferenciaLaboral" Type="int" Mode="In" />
+          <Parameter Name="IdReferenciaLaboralD" Type="int" Mode="In" />
+          <Parameter Name="CartaRecomendacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pActualizaImssFile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdSolicitud" Type="int" Mode="In" />
+          <Parameter Name="IdUsuarioRegistro" Type="int" Mode="In" />
+          <Parameter Name="ImssFIle" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pActualizaProductosEmpresas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="pBorraProductosEmpresas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pDesactivaEmpresa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pDesactivaProductos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pEliminaRegistrosPatronales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdSolicitud" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pInsertaAdministradores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+          <Parameter Name="Nivel" Type="int" Mode="In" />
+          <Parameter Name="idEmpresa" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pInsertaCartaIndividual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdRegistroPatronal" Type="int" Mode="In" />
+          <Parameter Name="FechaIngreso" Type="date" Mode="In" />
+          <Parameter Name="FechaEgreso" Type="date" Mode="In" />
+        </Function>
+        <Function Name="pInsertaEmpresas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RazonSocial" Type="varchar" Mode="In" />
+          <Parameter Name="CodigoRegistro" Type="varchar" Mode="In" />
+          <Parameter Name="IdEstatus" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pInsertaEmpresasFacturar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="RFC" Type="varchar" Mode="In" />
+          <Parameter Name="UsoCFDI" Type="varchar" Mode="In" />
+          <Parameter Name="MetodoPago" Type="varchar" Mode="In" />
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pInsertaProductos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="IdEstatus" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pInsertaProductosEmpresas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="pInsertaReferenciasLaborales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EstadoCivil" Type="char" Mode="In" />
+          <Parameter Name="FechaAnteriorIngreso" Type="date" Mode="In" />
+          <Parameter Name="FamiliaenEmpresa" Type="char" Mode="In" />
+          <Parameter Name="Observaciones" Type="ntext" Mode="In" />
+          <Parameter Name="IdSolicitud" Type="int" Mode="In" />
+          <Parameter Name="FechaAnteriorEgreso" Type="date" Mode="In" />
+          <Parameter Name="TrabajoAntesEmpresa" Type="char" Mode="In" />
+        </Function>
+        <Function Name="pInsertaReferenciasLaboralesD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdReferenciaLaboral" Type="int" Mode="In" />
+          <Parameter Name="NombreEmpresa" Type="varchar" Mode="In" />
+          <Parameter Name="Sucursal" Type="varchar" Mode="In" />
+          <Parameter Name="Outsourcing" Type="varchar" Mode="In" />
+          <Parameter Name="MarcaAsignada" Type="varchar" Mode="In" />
+          <Parameter Name="GiroEmpresa" Type="varchar" Mode="In" />
+          <Parameter Name="DomicilioLaboral" Type="varchar" Mode="In" />
+          <Parameter Name="PuestoDesempeñado" Type="varchar" Mode="In" />
+          <Parameter Name="FechaIngreso" Type="date" Mode="In" />
+          <Parameter Name="FechaEgreso" Type="date" Mode="In" />
+          <Parameter Name="MotivoSalida" Type="varchar" Mode="In" />
+          <Parameter Name="CartaRecomendacion" Type="varchar" Mode="In" />
+          <Parameter Name="JefeInmediato" Type="varchar" Mode="In" />
+          <Parameter Name="Telefonos" Type="varchar" Mode="In" />
+          <Parameter Name="Observaciones" Type="ntext" Mode="In" />
+        </Function>
+        <Function Name="pInsertaRegistrosPatronales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdSolicitud" Type="int" Mode="In" />
+          <Parameter Name="RegistroPatronal" Type="varchar" Mode="In" />
+          <Parameter Name="NombreCompania" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pInsertaSolicitudes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="Nombres" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoPatermo" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+          <Parameter Name="Puesto" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+          <Parameter Name="LugarNacimiento" Type="varchar" Mode="In" />
+          <Parameter Name="CURP" Type="varchar" Mode="In" />
+          <Parameter Name="IMSS" Type="varchar" Mode="In" />
+          <Parameter Name="TelefonoCelular" Type="varchar" Mode="In" />
+          <Parameter Name="TelefonoCasa" Type="varchar" Mode="In" />
+          <Parameter Name="TelefonoRecados" Type="varchar" Mode="In" />
+          <Parameter Name="Calle" Type="varchar" Mode="In" />
+          <Parameter Name="NumExterior" Type="varchar" Mode="In" />
+          <Parameter Name="NumInterior" Type="varchar" Mode="In" />
+          <Parameter Name="Colonia" Type="varchar" Mode="In" />
+          <Parameter Name="CodigoPostal" Type="varchar" Mode="In" />
+          <Parameter Name="AlcaldiaMunicipio" Type="varchar" Mode="In" />
+          <Parameter Name="Ciudad" Type="varchar" Mode="In" />
+          <Parameter Name="IdEmpresaFacturar" Type="int" Mode="In" />
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+          <Parameter Name="UploadFileName" Type="varchar" Mode="In" />
+          <Parameter Name="FechaCaptura" Type="datetime" Mode="In" />
+          <Parameter Name="FechaAtencion" Type="date" Mode="In" />
+          <Parameter Name="IdUsuarioRegistro" Type="int" Mode="In" />
+          <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
+          <Parameter Name="IdEstatus" Type="int" Mode="In" />
+          <Parameter Name="ImssFile" Type="varchar" Mode="In" />
+          <Parameter Name="emailContacto" Type="varchar" Mode="In" />
+          <Parameter Name="observaciones" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pInsertaSolicitudesArchivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdSolicitud" Type="int" Mode="In" />
+          <Parameter Name="AvisoPrivacidad" Type="varchar" Mode="In" />
+          <Parameter Name="INE" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pInsertaUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="idEmpresa" Type="int" Mode="In" />
+          <Parameter Name="Contrasena" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="IdEstatus" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ESEModelStoreContainer">
+          <EntitySet Name="Administradores" EntityType="Self.Administradores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartaIndividual" EntityType="Self.CartaIndividual" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contactos" EntityType="Self.Contactos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpresasFacturar" EntityType="Self.EmpresasFacturar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estatus" EntityType="Self.Estatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Imss" EntityType="Self.Imss" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReferenciasLaborales" EntityType="Self.ReferenciasLaborales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReferenciasLaboralesD" EntityType="Self.ReferenciasLaboralesD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistrosPatronales" EntityType="Self.RegistrosPatronales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solicitudes" EntityType="Self.Solicitudes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SolicitudesArchivos" EntityType="Self.SolicitudesArchivos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductosEmpresas" EntityType="Self.ProductosEmpresas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProductosEmpresas].[IdProducto] AS [IdProducto], 
+    [ProductosEmpresas].[IdEmpresa] AS [IdEmpresa], 
+    [ProductosEmpresas].[Precio] AS [Precio]
+    FROM [dbo].[ProductosEmpresas] AS [ProductosEmpresas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vCartaIndividual" EntityType="Self.vCartaIndividual" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vCartaIndividual].[IdCartaIndividual] AS [IdCartaIndividual], 
+    [vCartaIndividual].[IdRegistroPatronal] AS [IdRegistroPatronal], 
+    [vCartaIndividual].[RegistroPatronal] AS [RegistroPatronal], 
+    [vCartaIndividual].[NombreCompania] AS [NombreCompania], 
+    [vCartaIndividual].[FechaIngreso] AS [FechaIngreso], 
+    [vCartaIndividual].[FechaEgreso] AS [FechaEgreso], 
+    [vCartaIndividual].[IdSolicitud] AS [IdSolicitud], 
+    [vCartaIndividual].[DFechaIngreso] AS [DFechaIngreso], 
+    [vCartaIndividual].[DFechaEgreso] AS [DFechaEgreso]
+    FROM [dbo].[vCartaIndividual] AS [vCartaIndividual]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vContactos" EntityType="Self.vContactos" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vContactos].[IdContacto] AS [IdContacto], 
+    [vContactos].[IdEmpresa] AS [IdEmpresa], 
+    [vContactos].[Nombre] AS [Nombre], 
+    [vContactos].[RazonSocial] AS [RazonSocial], 
+    [vContactos].[Email] AS [Email], 
+    [vContactos].[Telefono] AS [Telefono], 
+    [vContactos].[Puesto] AS [Puesto]
+    FROM [dbo].[vContactos] AS [vContactos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vEmpresas" EntityType="Self.vEmpresas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vEmpresas].[IdEmpresa] AS [IdEmpresa], 
+    [vEmpresas].[RazonSocial] AS [RazonSocial], 
+    [vEmpresas].[CodigoRegistro] AS [CodigoRegistro], 
+    [vEmpresas].[IdEstatus] AS [IdEstatus], 
+    [vEmpresas].[Estatus] AS [Estatus]
+    FROM [dbo].[vEmpresas] AS [vEmpresas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vEmpresasFacturar" EntityType="Self.vEmpresasFacturar" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vEmpresasFacturar].[IdEmpresaFacturar] AS [IdEmpresaFacturar], 
+    [vEmpresasFacturar].[NombreComercial] AS [NombreComercial], 
+    [vEmpresasFacturar].[RazonSocial] AS [RazonSocial], 
+    [vEmpresasFacturar].[RFC] AS [RFC], 
+    [vEmpresasFacturar].[IdEmpresa] AS [IdEmpresa]
+    FROM [dbo].[vEmpresasFacturar] AS [vEmpresasFacturar]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vProductos" EntityType="Self.vProductos" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vProductos].[IdProducto] AS [IdProducto], 
+    [vProductos].[Nombre] AS [Nombre], 
+    [vProductos].[Descripcion] AS [Descripcion], 
+    [vProductos].[IdEstatus] AS [IdEstatus], 
+    [vProductos].[Estatus] AS [Estatus]
+    FROM [dbo].[vProductos] AS [vProductos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vProductosEmpresas" EntityType="Self.vProductosEmpresas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vProductosEmpresas].[IdProducto] AS [IdProducto], 
+    [vProductosEmpresas].[Nombre] AS [Nombre], 
+    [vProductosEmpresas].[RazonSocial] AS [RazonSocial], 
+    [vProductosEmpresas].[IdEmpresa] AS [IdEmpresa], 
+    [vProductosEmpresas].[Precio] AS [Precio]
+    FROM [dbo].[vProductosEmpresas] AS [vProductosEmpresas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vReferenciasLaborales" EntityType="Self.vReferenciasLaborales" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vReferenciasLaborales].[IdReferenciaLaboral] AS [IdReferenciaLaboral], 
+    [vReferenciasLaborales].[EstadoCivil] AS [EstadoCivil], 
+    [vReferenciasLaborales].[FechaAnteriorIngreso] AS [FechaAnteriorIngreso], 
+    [vReferenciasLaborales].[FamiliaenEmpresa] AS [FamiliaenEmpresa], 
+    [vReferenciasLaborales].[Observaciones] AS [Observaciones], 
+    [vReferenciasLaborales].[IdSolicitud] AS [IdSolicitud], 
+    [vReferenciasLaborales].[FechaAnteriorEgreso] AS [FechaAnteriorEgreso], 
+    [vReferenciasLaborales].[Nombre] AS [Nombre], 
+    [vReferenciasLaborales].[TrabajoAntesEmpresa] AS [TrabajoAntesEmpresa], 
+    [vReferenciasLaborales].[IdReferenciaLaboralD] AS [IdReferenciaLaboralD], 
+    [vReferenciasLaborales].[NombreEmpresa] AS [NombreEmpresa], 
+    [vReferenciasLaborales].[Sucursal] AS [Sucursal], 
+    [vReferenciasLaborales].[Outsourcing] AS [Outsourcing], 
+    [vReferenciasLaborales].[GiroEmpresa] AS [GiroEmpresa], 
+    [vReferenciasLaborales].[MarcaAsignada] AS [MarcaAsignada], 
+    [vReferenciasLaborales].[DomicilioLaboral] AS [DomicilioLaboral], 
+    [vReferenciasLaborales].[PuestoDesempeñado] AS [PuestoDesempeñado], 
+    [vReferenciasLaborales].[FechaIngreso] AS [FechaIngreso], 
+    [vReferenciasLaborales].[FechaEgreso] AS [FechaEgreso], 
+    [vReferenciasLaborales].[MotivoSalida] AS [MotivoSalida], 
+    [vReferenciasLaborales].[CartaRecomendacion] AS [CartaRecomendacion], 
+    [vReferenciasLaborales].[JefeInmediato] AS [JefeInmediato], 
+    [vReferenciasLaborales].[Telefonos] AS [Telefonos], 
+    [vReferenciasLaborales].[ObservacionesD] AS [ObservacionesD], 
+    [vReferenciasLaborales].[Puesto] AS [Puesto], 
+    [vReferenciasLaborales].[FechaNacimiento] AS [FechaNacimiento], 
+    [vReferenciasLaborales].[LugarNacimiento] AS [LugarNacimiento], 
+    [vReferenciasLaborales].[CURP] AS [CURP], 
+    [vReferenciasLaborales].[IMSS] AS [IMSS], 
+    [vReferenciasLaborales].[TelefonoCelular] AS [TelefonoCelular], 
+    [vReferenciasLaborales].[TelefonoCasa] AS [TelefonoCasa], 
+    [vReferenciasLaborales].[NumExterior] AS [NumExterior], 
+    [vReferenciasLaborales].[NumInterior] AS [NumInterior], 
+    [vReferenciasLaborales].[Colonia] AS [Colonia], 
+    [vReferenciasLaborales].[Calle] AS [Calle], 
+    [vReferenciasLaborales].[CodigoPostal] AS [CodigoPostal], 
+    [vReferenciasLaborales].[AlcaldiaMunicipio] AS [AlcaldiaMunicipio], 
+    [vReferenciasLaborales].[Ciudad] AS [Ciudad], 
+    [vReferenciasLaborales].[emailCandidato] AS [emailCandidato], 
+    [vReferenciasLaborales].[Nombre Empresa a Laborar] AS [Nombre Empresa a Laborar]
+    FROM [dbo].[vReferenciasLaborales] AS [vReferenciasLaborales]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vReferenciasLaboralesD" EntityType="Self.vReferenciasLaboralesD" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vReferenciasLaboralesD].[IdReferenciaLaboralD] AS [IdReferenciaLaboralD], 
+    [vReferenciasLaboralesD].[IdReferenciaLaboral] AS [IdReferenciaLaboral], 
+    [vReferenciasLaboralesD].[NombreEmpresa] AS [NombreEmpresa], 
+    [vReferenciasLaboralesD].[Sucursal] AS [Sucursal], 
+    [vReferenciasLaboralesD].[Outsourcing] AS [Outsourcing], 
+    [vReferenciasLaboralesD].[MarcaAsignada] AS [MarcaAsignada], 
+    [vReferenciasLaboralesD].[GiroEmpresa] AS [GiroEmpresa], 
+    [vReferenciasLaboralesD].[DomicilioLaboral] AS [DomicilioLaboral], 
+    [vReferenciasLaboralesD].[PuestoDesempeñado] AS [PuestoDesempeñado], 
+    [vReferenciasLaboralesD].[FechaIngreso] AS [FechaIngreso], 
+    [vReferenciasLaboralesD].[FechaEgreso] AS [FechaEgreso], 
+    [vReferenciasLaboralesD].[MotivoSalida] AS [MotivoSalida], 
+    [vReferenciasLaboralesD].[CartaRecomendacion] AS [CartaRecomendacion], 
+    [vReferenciasLaboralesD].[JefeInmediato] AS [JefeInmediato], 
+    [vReferenciasLaboralesD].[Telefonos] AS [Telefonos], 
+    [vReferenciasLaboralesD].[Observaciones] AS [Observaciones]
+    FROM [dbo].[vReferenciasLaboralesD] AS [vReferenciasLaboralesD]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vRegistrosPatronales" EntityType="Self.vRegistrosPatronales" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vRegistrosPatronales].[IdRegistroPatronal] AS [IdRegistroPatronal], 
+    [vRegistrosPatronales].[IdSolicitud] AS [IdSolicitud], 
+    [vRegistrosPatronales].[RegistroPatronal] AS [RegistroPatronal], 
+    [vRegistrosPatronales].[NombreCompania] AS [NombreCompania]
+    FROM [dbo].[vRegistrosPatronales] AS [vRegistrosPatronales]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vSolicitudes" EntityType="Self.vSolicitudes" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vSolicitudes].[IdSolicitud] AS [IdSolicitud], 
+    [vSolicitudes].[Candidato] AS [Candidato], 
+    [vSolicitudes].[Puesto] AS [Puesto], 
+    [vSolicitudes].[NombreComercial] AS [NombreComercial], 
+    [vSolicitudes].[FechaCaptura] AS [FechaCaptura], 
+    [vSolicitudes].[FechaAtencion] AS [FechaAtencion], 
+    [vSolicitudes].[CURP] AS [CURP], 
+    [vSolicitudes].[IMSS] AS [IMSS], 
+    [vSolicitudes].[ImssFile] AS [ImssFile], 
+    [vSolicitudes].[Nombre] AS [Nombre], 
+    [vSolicitudes].[emailCandidato] AS [emailCandidato], 
+    [vSolicitudes].[Estatus] AS [Estatus]
+    FROM [dbo].[vSolicitudes] AS [vSolicitudes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vUsuarios" EntityType="Self.vUsuarios" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vUsuarios].[IdUsuario] AS [IdUsuario], 
+    [vUsuarios].[Nombre] AS [Nombre], 
+    [vUsuarios].[idEmpresa] AS [idEmpresa], 
+    [vUsuarios].[RazonSocial] AS [RazonSocial], 
+    [vUsuarios].[Contrasena] AS [Contrasena], 
+    [vUsuarios].[Email] AS [Email], 
+    [vUsuarios].[Estatus] AS [Estatus]
+    FROM [dbo].[vUsuarios] AS [vUsuarios]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Administradores_Empresas" Association="Self.FK_Administradores_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Administradores" EntitySet="Administradores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Administradores_Usuarios" Association="Self.FK_Administradores_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Administradores" EntitySet="Administradores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartaIndividual_RegistrosPatronales" Association="Self.FK_CartaIndividual_RegistrosPatronales">
+            <End Role="RegistrosPatronales" EntitySet="RegistrosPatronales" />
+            <End Role="CartaIndividual" EntitySet="CartaIndividual" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contactos_Empresas" Association="Self.FK_Contactos_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Contactos" EntitySet="Contactos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresas_Estatus" Association="Self.FK_Empresas_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Empresas" EntitySet="Empresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpresasFacturar_Empresas" Association="Self.FK_EmpresasFacturar_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="EmpresasFacturar" EntitySet="EmpresasFacturar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Imss_RegistrosPatronales" Association="Self.FK_Imss_RegistrosPatronales">
+            <End Role="RegistrosPatronales" EntitySet="RegistrosPatronales" />
+            <End Role="Imss" EntitySet="Imss" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Productos_Estatus" Association="Self.FK_Productos_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductosEmpresas_Empresas" Association="Self.FK_ProductosEmpresas_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="ProductosEmpresas" EntitySet="ProductosEmpresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductosEmpresas_Productos" Association="Self.FK_ProductosEmpresas_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ProductosEmpresas" EntitySet="ProductosEmpresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReferenciasLaborales_Solicitudes" Association="Self.FK_ReferenciasLaborales_Solicitudes">
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+            <End Role="ReferenciasLaborales" EntitySet="ReferenciasLaborales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReferenciasLaboralesD_ReferenciasLaborales" Association="Self.FK_ReferenciasLaboralesD_ReferenciasLaborales">
+            <End Role="ReferenciasLaborales" EntitySet="ReferenciasLaborales" />
+            <End Role="ReferenciasLaboralesD" EntitySet="ReferenciasLaboralesD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrosPatronales_Solicitudes" Association="Self.FK_RegistrosPatronales_Solicitudes">
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+            <End Role="RegistrosPatronales" EntitySet="RegistrosPatronales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Empresas" Association="Self.FK_Solicitudes_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_EmpresasFacturar" Association="Self.FK_Solicitudes_EmpresasFacturar">
+            <End Role="EmpresasFacturar" EntitySet="EmpresasFacturar" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Estatus" Association="Self.FK_Solicitudes_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Productos" Association="Self.FK_Solicitudes_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudesArchivos_Solicitudes" Association="Self.FK_SolicitudesArchivos_Solicitudes">
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+            <End Role="SolicitudesArchivos" EntitySet="SolicitudesArchivos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Empresas" Association="Self.FK_Usuarios_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Estatus" Association="Self.FK_Usuarios_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ESEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administradores">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Nivel" Type="Int32" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Administradores_Empresas" FromRole="Administradores" ToRole="Empresas" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Administradores_Usuarios" FromRole="Administradores" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="CartaIndividual">
+          <Key>
+            <PropertyRef Name="IdCartaIndividual" />
+          </Key>
+          <Property Name="IdCartaIndividual" Type="Int32" Nullable="false" />
+          <Property Name="IdRegistroPatronal" Type="Int32" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="0" />
+          <Property Name="FechaEgreso" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="RegistrosPatronales" Relationship="Self.FK_CartaIndividual_RegistrosPatronales" FromRole="CartaIndividual" ToRole="RegistrosPatronales" />
+        </EntityType>
+        <EntityType Name="Contactos">
+          <Key>
+            <PropertyRef Name="IdContacto" />
+          </Key>
+          <Property Name="IdContacto" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Puesto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Contactos_Empresas" FromRole="Contactos" ToRole="Empresas" />
+        </EntityType>
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="RazonSocial" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoRegistro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstatus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Administradores" Relationship="Self.FK_Administradores_Empresas" FromRole="Empresas" ToRole="Administradores" />
+          <NavigationProperty Name="Contactos" Relationship="Self.FK_Contactos_Empresas" FromRole="Empresas" ToRole="Contactos" />
+          <NavigationProperty Name="Estatus" Relationship="Self.FK_Empresas_Estatus" FromRole="Empresas" ToRole="Estatus" />
+          <NavigationProperty Name="EmpresasFacturar" Relationship="Self.FK_EmpresasFacturar_Empresas" FromRole="Empresas" ToRole="EmpresasFacturar" />
+          <NavigationProperty Name="ProductosEmpresas" Relationship="Self.FK_ProductosEmpresas_Empresas" FromRole="Empresas" ToRole="ProductosEmpresas" />
+          <NavigationProperty Name="Solicitudes" Relationship="Self.FK_Solicitudes_Empresas" FromRole="Empresas" ToRole="Solicitudes" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Empresas" FromRole="Empresas" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="EmpresasFacturar">
+          <Key>
+            <PropertyRef Name="IdEmpresaFacturar" />
+          </Key>
+          <Property Name="IdEmpresaFacturar" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="RFC" Type="String" MaxLength="14" FixedLength="true" Unicode="false" />
+          <Property Name="UsoCFDI" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="MetodoPago" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa" Type="Int32" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_EmpresasFacturar_Empresas" FromRole="EmpresasFacturar" ToRole="Empresas" />
+          <NavigationProperty Name="Solicitudes" Relationship="Self.FK_Solicitudes_EmpresasFacturar" FromRole="EmpresasFacturar" ToRole="Solicitudes" />
+        </EntityType>
+        <EntityType Name="Estatus">
+          <Key>
+            <PropertyRef Name="IdEstatus" />
+          </Key>
+          <Property Name="IdEstatus" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Empresas_Estatus" FromRole="Estatus" ToRole="Empresas" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_Productos_Estatus" FromRole="Estatus" ToRole="Productos" />
+          <NavigationProperty Name="Solicitudes" Relationship="Self.FK_Solicitudes_Estatus" FromRole="Estatus" ToRole="Solicitudes" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Estatus" FromRole="Estatus" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Imss">
+          <Key>
+            <PropertyRef Name="IdImss" />
+          </Key>
+          <Property Name="IdImss" Type="Int32" Nullable="false" />
+          <Property Name="IdRegistroPatronal" Type="Int32" />
+          <Property Name="ReportadoPorCandidato" Type="Byte" />
+          <Property Name="NombreDioReferencias" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PuestoDeQuienDioReferencias" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoDeQuienDioReferencias" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EmailDeQuienDioReferencias" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoSalida" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PuestoInicial" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PuestoFinal" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Referencia" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="PertenecioSindicato" Type="Byte" />
+          <NavigationProperty Name="RegistrosPatronales" Relationship="Self.FK_Imss_RegistrosPatronales" FromRole="Imss" ToRole="RegistrosPatronales" />
+        </EntityType>
+        <EntityType Name="Parametros">
+          <Key>
+            <PropertyRef Name="IdParametro" />
+          </Key>
+          <Property Name="IdParametro" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="HoraCorteAtencion" Type="Time" Precision="7" />
+          <Property Name="CorreoParaEnvio" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoContrasena" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstatus" Type="Int32" />
+          <NavigationProperty Name="Estatus" Relationship="Self.FK_Productos_Estatus" FromRole="Productos" ToRole="Estatus" />
+          <NavigationProperty Name="ProductosEmpresas" Relationship="Self.FK_ProductosEmpresas_Productos" FromRole="Productos" ToRole="ProductosEmpresas" />
+          <NavigationProperty Name="Solicitudes" Relationship="Self.FK_Solicitudes_Productos" FromRole="Productos" ToRole="Solicitudes" />
+        </EntityType>
+        <EntityType Name="ReferenciasLaborales">
+          <Key>
+            <PropertyRef Name="IdReferenciaLaboral" />
+          </Key>
+          <Property Name="IdReferenciaLaboral" Type="Int32" Nullable="false" />
+          <Property Name="EstadoCivil" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="FechaAnteriorIngreso" Type="DateTime" Precision="0" />
+          <Property Name="FamiliaenEmpresa" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdSolicitud" Type="Int32" />
+          <Property Name="FechaAnteriorEgreso" Type="DateTime" Precision="0" />
+          <Property Name="TrabajoAntesEmpresa" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Solicitudes" Relationship="Self.FK_ReferenciasLaborales_Solicitudes" FromRole="ReferenciasLaborales" ToRole="Solicitudes" />
+          <NavigationProperty Name="ReferenciasLaboralesD" Relationship="Self.FK_ReferenciasLaboralesD_ReferenciasLaborales" FromRole="ReferenciasLaborales" ToRole="ReferenciasLaboralesD" />
+        </EntityType>
+        <EntityType Name="ReferenciasLaboralesD">
+          <Key>
+            <PropertyRef Name="IdReferenciaLaboralD" />
+          </Key>
+          <Property Name="IdReferenciaLaboralD" Type="Int32" Nullable="false" />
+          <Property Name="IdReferenciaLaboral" Type="Int32" />
+          <Property Name="NombreEmpresa" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Sucursal" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Outsourcing" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MarcaAsignada" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="GiroEmpresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioLaboral" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PuestoDesempeñado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="0" />
+          <Property Name="FechaEgreso" Type="DateTime" Precision="0" />
+          <Property Name="MotivoSalida" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CartaRecomendacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="JefeInmediato" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Telefonos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ReferenciasLaborales" Relationship="Self.FK_ReferenciasLaboralesD_ReferenciasLaborales" FromRole="ReferenciasLaboralesD" ToRole="ReferenciasLaborales" />
+        </EntityType>
+        <EntityType Name="RegistrosPatronales">
+          <Key>
+            <PropertyRef Name="IdRegistroPatronal" />
+          </Key>
+          <Property Name="IdRegistroPatronal" Type="Int32" Nullable="false" />
+          <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
+          <Property Name="RegistroPatronal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCompania" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CartaIndividual" Relationship="Self.FK_CartaIndividual_RegistrosPatronales" FromRole="RegistrosPatronales" ToRole="CartaIndividual" />
+          <NavigationProperty Name="Imss" Relationship="Self.FK_Imss_RegistrosPatronales" FromRole="RegistrosPatronales" ToRole="Imss" />
+          <NavigationProperty Name="Solicitudes" Relationship="Self.FK_RegistrosPatronales_Solicitudes" FromRole="RegistrosPatronales" ToRole="Solicitudes" />
+        </EntityType>
+        <EntityType Name="Solicitudes">
+          <Key>
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa" Type="Int32" />
+          <Property Name="Nombres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPatermo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Puesto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="LugarNacimiento" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CURP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IMSS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoCelular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoCasa" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoRecados" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Calle" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NumExterior" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NumInterior" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Colonia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="AlcaldiaMunicipio" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresaFacturar" Type="Int32" />
+          <Property Name="IdProducto" Type="Int32" />
+          <Property Name="UploadFileName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCaptura" Type="DateTime" Precision="3" />
+          <Property Name="FechaAtencion" Type="DateTime" Precision="0" />
+          <Property Name="IdUsuarioRegistro" Type="Int32" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="IdStatus" Type="Int32" />
+          <Property Name="ImssFile" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="emailCandidato" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="observaciones" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="SolicitadoPor" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="FaceBook" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Instagram" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Twitter" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SueldoAspirado" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TiempoEstimadoTraslado" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Solicitudes_Empresas" FromRole="Solicitudes" ToRole="Empresas" />
+          <NavigationProperty Name="EmpresasFacturar" Relationship="Self.FK_Solicitudes_EmpresasFacturar" FromRole="Solicitudes" ToRole="EmpresasFacturar" />
+          <NavigationProperty Name="Estatus" Relationship="Self.FK_Solicitudes_Estatus" FromRole="Solicitudes" ToRole="Estatus" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_Solicitudes_Productos" FromRole="Solicitudes" ToRole="Productos" />
+          <NavigationProperty Name="ReferenciasLaborales" Relationship="Self.FK_ReferenciasLaborales_Solicitudes" FromRole="Solicitudes" ToRole="ReferenciasLaborales" />
+          <NavigationProperty Name="RegistrosPatronales" Relationship="Self.FK_RegistrosPatronales_Solicitudes" FromRole="Solicitudes" ToRole="RegistrosPatronales" />
+          <NavigationProperty Name="SolicitudesArchivos" Relationship="Self.FK_SolicitudesArchivos_Solicitudes" FromRole="Solicitudes" ToRole="SolicitudesArchivos" />
+        </EntityType>
+        <EntityType Name="SolicitudesArchivos">
+          <Key>
+            <PropertyRef Name="IdSolicitudArchivo" />
+          </Key>
+          <Property Name="IdSolicitudArchivo" Type="Int32" Nullable="false" />
+          <Property Name="IdSolicitud" Type="Int32" />
+          <Property Name="AvisoPrivacidad" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="INE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Solicitudes" Relationship="Self.FK_SolicitudesArchivos_Solicitudes" FromRole="SolicitudesArchivos" ToRole="Solicitudes" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="idEmpresa" Type="Int32" />
+          <Property Name="Contrasena" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstatus" Type="Int32" />
+          <NavigationProperty Name="Administradores" Relationship="Self.FK_Administradores_Usuarios" FromRole="Usuarios" ToRole="Administradores" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Usuarios_Empresas" FromRole="Usuarios" ToRole="Empresas" />
+          <NavigationProperty Name="Estatus" Relationship="Self.FK_Usuarios_Estatus" FromRole="Usuarios" ToRole="Estatus" />
+        </EntityType>
+        <EntityType Name="ProductosEmpresas">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="14" Scale="2" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_ProductosEmpresas_Empresas" FromRole="ProductosEmpresas" ToRole="Empresas" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK_ProductosEmpresas_Productos" FromRole="ProductosEmpresas" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="vContactos">
+          <Key>
+            <PropertyRef Name="IdContacto" />
+          </Key>
+          <Property Name="IdContacto" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Puesto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vEmpresas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEstatus" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="RazonSocial" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoRegistro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstatus" Type="Int32" Nullable="false" />
+          <Property Name="Estatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vEmpresasFacturar">
+          <Key>
+            <PropertyRef Name="IdEmpresaFacturar" />
+          </Key>
+          <Property Name="IdEmpresaFacturar" Type="Int32" Nullable="false" />
+          <Property Name="NombreComercial" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="RFC" Type="String" MaxLength="14" FixedLength="true" Unicode="false" />
+          <Property Name="IdEmpresa" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vProductos">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstatus" Type="Int32" />
+          <Property Name="Estatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vProductosEmpresas">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="14" Scale="2" />
+        </EntityType>
+        <EntityType Name="vReferenciasLaborales">
+          <Key>
+            <PropertyRef Name="IdReferenciaLaboral" />
+            <PropertyRef Name="IdReferenciaLaboralD" />
+          </Key>
+          <Property Name="IdReferenciaLaboral" Type="Int32" Nullable="false" />
+          <Property Name="EstadoCivil" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="FechaAnteriorIngreso" Type="DateTime" Precision="0" />
+          <Property Name="FamiliaenEmpresa" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdSolicitud" Type="Int32" />
+          <Property Name="FechaAnteriorEgreso" Type="DateTime" Precision="0" />
+          <Property Name="Nombre" Type="String" MaxLength="452" FixedLength="false" Unicode="false" />
+          <Property Name="TrabajoAntesEmpresa" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="IdReferenciaLaboralD" Type="Int32" Nullable="false" />
+          <Property Name="NombreEmpresa" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Sucursal" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Outsourcing" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="GiroEmpresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MarcaAsignada" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioLaboral" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PuestoDesempeñado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="0" />
+          <Property Name="FechaEgreso" Type="DateTime" Precision="0" />
+          <Property Name="MotivoSalida" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CartaRecomendacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="JefeInmediato" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Telefonos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ObservacionesD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Puesto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="LugarNacimiento" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CURP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IMSS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoCelular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoCasa" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumExterior" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NumInterior" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Colonia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Calle" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="AlcaldiaMunicipio" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="emailCandidato" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre_Empresa_a_Laborar" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vReferenciasLaboralesD">
+          <Key>
+            <PropertyRef Name="IdReferenciaLaboralD" />
+          </Key>
+          <Property Name="IdReferenciaLaboralD" Type="Int32" Nullable="false" />
+          <Property Name="IdReferenciaLaboral" Type="Int32" />
+          <Property Name="NombreEmpresa" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Sucursal" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Outsourcing" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MarcaAsignada" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="GiroEmpresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioLaboral" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PuestoDesempeñado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="0" />
+          <Property Name="FechaEgreso" Type="DateTime" Precision="0" />
+          <Property Name="MotivoSalida" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CartaRecomendacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="JefeInmediato" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Telefonos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vRegistrosPatronales">
+          <Key>
+            <PropertyRef Name="IdRegistroPatronal" />
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdRegistroPatronal" Type="Int32" Nullable="false" />
+          <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
+          <Property Name="RegistroPatronal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCompania" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vSolicitudes">
+          <Key>
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
+          <Property Name="Candidato" Type="String" MaxLength="452" FixedLength="false" Unicode="false" />
+          <Property Name="Puesto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NombreComercial" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCaptura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAtencion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CURP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IMSS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ImssFile" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="emailCandidato" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Estatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vUsuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="idEmpresa" Type="Int32" />
+          <Property Name="RazonSocial" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Estatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Administradores_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+          <End Role="Administradores" Type="Self.Administradores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Administradores">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Administradores_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Administradores" Type="Self.Administradores" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Administradores">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartaIndividual_RegistrosPatronales">
+          <End Role="RegistrosPatronales" Type="Self.RegistrosPatronales" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CartaIndividual" Type="Self.CartaIndividual" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegistrosPatronales">
+              <PropertyRef Name="IdRegistroPatronal" />
+            </Principal>
+            <Dependent Role="CartaIndividual">
+              <PropertyRef Name="IdRegistroPatronal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contactos_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Contactos" Type="Self.Contactos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Contactos">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresas_Estatus">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="1" />
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
+            </Principal>
+            <Dependent Role="Empresas">
+              <PropertyRef Name="IdEstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpresasFacturar_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="EmpresasFacturar" Type="Self.EmpresasFacturar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="EmpresasFacturar">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductosEmpresas_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+          <End Role="ProductosEmpresas" Type="Self.ProductosEmpresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="ProductosEmpresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="idEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_EmpresasFacturar">
+          <End Role="EmpresasFacturar" Type="Self.EmpresasFacturar" Multiplicity="0..1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpresasFacturar">
+              <PropertyRef Name="IdEmpresaFacturar" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdEmpresaFacturar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Productos_Estatus">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="IdEstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Estatus">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Estatus">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="IdEstatus" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IdEstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Imss_RegistrosPatronales">
+          <End Role="RegistrosPatronales" Type="Self.RegistrosPatronales" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Imss" Type="Self.Imss" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegistrosPatronales">
+              <PropertyRef Name="IdRegistroPatronal" />
+            </Principal>
+            <Dependent Role="Imss">
+              <PropertyRef Name="IdRegistroPatronal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductosEmpresas_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="ProductosEmpresas" Type="Self.ProductosEmpresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="ProductosEmpresas">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitudes_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReferenciasLaborales_Solicitudes">
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="0..1" />
+          <End Role="ReferenciasLaborales" Type="Self.ReferenciasLaborales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitudes">
+              <PropertyRef Name="IdSolicitud" />
+            </Principal>
+            <Dependent Role="ReferenciasLaborales">
+              <PropertyRef Name="IdSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReferenciasLaboralesD_ReferenciasLaborales">
+          <End Role="ReferenciasLaborales" Type="Self.ReferenciasLaborales" Multiplicity="0..1" />
+          <End Role="ReferenciasLaboralesD" Type="Self.ReferenciasLaboralesD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReferenciasLaborales">
+              <PropertyRef Name="IdReferenciaLaboral" />
+            </Principal>
+            <Dependent Role="ReferenciasLaboralesD">
+              <PropertyRef Name="IdReferenciaLaboral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrosPatronales_Solicitudes">
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="1" />
+          <End Role="RegistrosPatronales" Type="Self.RegistrosPatronales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitudes">
+              <PropertyRef Name="IdSolicitud" />
+            </Principal>
+            <Dependent Role="RegistrosPatronales">
+              <PropertyRef Name="IdSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SolicitudesArchivos_Solicitudes">
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="0..1" />
+          <End Role="SolicitudesArchivos" Type="Self.SolicitudesArchivos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitudes">
+              <PropertyRef Name="IdSolicitud" />
+            </Principal>
+            <Dependent Role="SolicitudesArchivos">
+              <PropertyRef Name="IdSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ESEEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administradores" EntityType="Self.Administradores" />
+          <EntitySet Name="CartaIndividual" EntityType="Self.CartaIndividual" />
+          <EntitySet Name="Contactos" EntityType="Self.Contactos" />
+          <EntitySet Name="Empresas" EntityType="Self.Empresas" />
+          <EntitySet Name="EmpresasFacturar" EntityType="Self.EmpresasFacturar" />
+          <EntitySet Name="Estatus" EntityType="Self.Estatus" />
+          <EntitySet Name="Imss" EntityType="Self.Imss" />
+          <EntitySet Name="Parametros" EntityType="Self.Parametros" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" />
+          <EntitySet Name="ReferenciasLaborales" EntityType="Self.ReferenciasLaborales" />
+          <EntitySet Name="ReferenciasLaboralesD" EntityType="Self.ReferenciasLaboralesD" />
+          <EntitySet Name="RegistrosPatronales" EntityType="Self.RegistrosPatronales" />
+          <EntitySet Name="Solicitudes" EntityType="Self.Solicitudes" />
+          <EntitySet Name="SolicitudesArchivos" EntityType="Self.SolicitudesArchivos" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="ProductosEmpresas" EntityType="Self.ProductosEmpresas" />
+          <EntitySet Name="vContactos" EntityType="Self.vContactos" />
+          <EntitySet Name="vEmpresas" EntityType="Self.vEmpresas" />
+          <EntitySet Name="vEmpresasFacturar" EntityType="Self.vEmpresasFacturar" />
+          <EntitySet Name="vProductos" EntityType="Self.vProductos" />
+          <EntitySet Name="vProductosEmpresas" EntityType="Self.vProductosEmpresas" />
+          <EntitySet Name="vReferenciasLaborales" EntityType="Self.vReferenciasLaborales" />
+          <EntitySet Name="vReferenciasLaboralesD" EntityType="Self.vReferenciasLaboralesD" />
+          <EntitySet Name="vRegistrosPatronales" EntityType="Self.vRegistrosPatronales" />
+          <EntitySet Name="vSolicitudes" EntityType="Self.vSolicitudes" />
+          <EntitySet Name="vUsuarios" EntityType="Self.vUsuarios" />
+          <AssociationSet Name="FK_Administradores_Empresas" Association="Self.FK_Administradores_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Administradores" EntitySet="Administradores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Administradores_Usuarios" Association="Self.FK_Administradores_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Administradores" EntitySet="Administradores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartaIndividual_RegistrosPatronales" Association="Self.FK_CartaIndividual_RegistrosPatronales">
+            <End Role="RegistrosPatronales" EntitySet="RegistrosPatronales" />
+            <End Role="CartaIndividual" EntitySet="CartaIndividual" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contactos_Empresas" Association="Self.FK_Contactos_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Contactos" EntitySet="Contactos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresas_Estatus" Association="Self.FK_Empresas_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Empresas" EntitySet="Empresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpresasFacturar_Empresas" Association="Self.FK_EmpresasFacturar_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="EmpresasFacturar" EntitySet="EmpresasFacturar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductosEmpresas_Empresas" Association="Self.FK_ProductosEmpresas_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="ProductosEmpresas" EntitySet="ProductosEmpresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Empresas" Association="Self.FK_Solicitudes_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Empresas" Association="Self.FK_Usuarios_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_EmpresasFacturar" Association="Self.FK_Solicitudes_EmpresasFacturar">
+            <End Role="EmpresasFacturar" EntitySet="EmpresasFacturar" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Productos_Estatus" Association="Self.FK_Productos_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Estatus" Association="Self.FK_Solicitudes_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Estatus" Association="Self.FK_Usuarios_Estatus">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Imss_RegistrosPatronales" Association="Self.FK_Imss_RegistrosPatronales">
+            <End Role="RegistrosPatronales" EntitySet="RegistrosPatronales" />
+            <End Role="Imss" EntitySet="Imss" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductosEmpresas_Productos" Association="Self.FK_ProductosEmpresas_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ProductosEmpresas" EntitySet="ProductosEmpresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitudes_Productos" Association="Self.FK_Solicitudes_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReferenciasLaborales_Solicitudes" Association="Self.FK_ReferenciasLaborales_Solicitudes">
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+            <End Role="ReferenciasLaborales" EntitySet="ReferenciasLaborales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReferenciasLaboralesD_ReferenciasLaborales" Association="Self.FK_ReferenciasLaboralesD_ReferenciasLaborales">
+            <End Role="ReferenciasLaborales" EntitySet="ReferenciasLaborales" />
+            <End Role="ReferenciasLaboralesD" EntitySet="ReferenciasLaboralesD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrosPatronales_Solicitudes" Association="Self.FK_RegistrosPatronales_Solicitudes">
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+            <End Role="RegistrosPatronales" EntitySet="RegistrosPatronales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SolicitudesArchivos_Solicitudes" Association="Self.FK_SolicitudesArchivos_Solicitudes">
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+            <End Role="SolicitudesArchivos" EntitySet="SolicitudesArchivos" />
+          </AssociationSet>
+          <FunctionImport Name="pActualizaAdministradores">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="Nivel" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="pActualizaCRFile">
+            <Parameter Name="IdReferenciaLaboral" Mode="In" Type="Int32" />
+            <Parameter Name="IdReferenciaLaboralD" Mode="In" Type="Int32" />
+            <Parameter Name="CartaRecomendacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pActualizaImssFile">
+            <Parameter Name="IdSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="IdUsuarioRegistro" Mode="In" Type="Int32" />
+            <Parameter Name="ImssFIle" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pActualizaProductosEmpresas">
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="pBorraProductosEmpresas">
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pDesactivaEmpresa">
+          <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pDesactivaProductos">
+          <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pEliminaRegistrosPatronales">
+          <Parameter Name="IdSolicitud" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pInsertaAdministradores">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="Nivel" Mode="In" Type="Int32" />
+            <Parameter Name="idEmpresa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pInsertaCartaIndividual">
+            <Parameter Name="IdRegistroPatronal" Mode="In" Type="Int32" />
+            <Parameter Name="FechaIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaEgreso" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="pInsertaEmpresas">
+            <Parameter Name="RazonSocial" Mode="In" Type="String" />
+            <Parameter Name="CodigoRegistro" Mode="In" Type="String" />
+            <Parameter Name="IdEstatus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pInsertaEmpresasFacturar">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="RFC" Mode="In" Type="String" />
+            <Parameter Name="UsoCFDI" Mode="In" Type="String" />
+            <Parameter Name="MetodoPago" Mode="In" Type="String" />
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pInsertaProductos">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="IdEstatus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pInsertaProductosEmpresas">
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="pInsertaReferenciasLaborales">
+            <Parameter Name="EstadoCivil" Mode="In" Type="String" />
+            <Parameter Name="FechaAnteriorIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="FamiliaenEmpresa" Mode="In" Type="String" />
+            <Parameter Name="Observaciones" Mode="In" Type="String" />
+            <Parameter Name="IdSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="FechaAnteriorEgreso" Mode="In" Type="DateTime" />
+            <Parameter Name="TrabajoAntesEmpresa" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pInsertaReferenciasLaboralesD">
+            <Parameter Name="IdReferenciaLaboral" Mode="In" Type="Int32" />
+            <Parameter Name="NombreEmpresa" Mode="In" Type="String" />
+            <Parameter Name="Sucursal" Mode="In" Type="String" />
+            <Parameter Name="Outsourcing" Mode="In" Type="String" />
+            <Parameter Name="MarcaAsignada" Mode="In" Type="String" />
+            <Parameter Name="GiroEmpresa" Mode="In" Type="String" />
+            <Parameter Name="DomicilioLaboral" Mode="In" Type="String" />
+            <Parameter Name="PuestoDesempeñado" Mode="In" Type="String" />
+            <Parameter Name="FechaIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaEgreso" Mode="In" Type="DateTime" />
+            <Parameter Name="MotivoSalida" Mode="In" Type="String" />
+            <Parameter Name="CartaRecomendacion" Mode="In" Type="String" />
+            <Parameter Name="JefeInmediato" Mode="In" Type="String" />
+            <Parameter Name="Telefonos" Mode="In" Type="String" />
+            <Parameter Name="Observaciones" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pInsertaRegistrosPatronales">
+            <Parameter Name="IdSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="RegistroPatronal" Mode="In" Type="String" />
+            <Parameter Name="NombreCompania" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pInsertaSolicitudes">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="Nombres" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPatermo" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="Puesto" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="LugarNacimiento" Mode="In" Type="String" />
+            <Parameter Name="CURP" Mode="In" Type="String" />
+            <Parameter Name="IMSS" Mode="In" Type="String" />
+            <Parameter Name="TelefonoCelular" Mode="In" Type="String" />
+            <Parameter Name="TelefonoCasa" Mode="In" Type="String" />
+            <Parameter Name="TelefonoRecados" Mode="In" Type="String" />
+            <Parameter Name="Calle" Mode="In" Type="String" />
+            <Parameter Name="NumExterior" Mode="In" Type="String" />
+            <Parameter Name="NumInterior" Mode="In" Type="String" />
+            <Parameter Name="Colonia" Mode="In" Type="String" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="AlcaldiaMunicipio" Mode="In" Type="String" />
+            <Parameter Name="Ciudad" Mode="In" Type="String" />
+            <Parameter Name="IdEmpresaFacturar" Mode="In" Type="Int32" />
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+            <Parameter Name="UploadFileName" Mode="In" Type="String" />
+            <Parameter Name="FechaCaptura" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaAtencion" Mode="In" Type="DateTime" />
+            <Parameter Name="IdUsuarioRegistro" Mode="In" Type="Int32" />
+            <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
+            <Parameter Name="IdEstatus" Mode="In" Type="Int32" />
+            <Parameter Name="ImssFile" Mode="In" Type="String" />
+            <Parameter Name="emailContacto" Mode="In" Type="String" />
+            <Parameter Name="observaciones" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pInsertaSolicitudesArchivos">
+            <Parameter Name="IdSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="AvisoPrivacidad" Mode="In" Type="String" />
+            <Parameter Name="INE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pInsertaUsuarios">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="idEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="IdEstatus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ESEModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ESEModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="vCartaIndividual" EntityType="ESEModel.vCartaIndividual" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="vCartaIndividual">
+          <Key>
+            <PropertyRef Name="IdCartaIndividual" />
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdCartaIndividual" Type="Int32" Nullable="false" />
+          <Property Name="IdRegistroPatronal" Type="Int32" />
+          <Property Name="RegistroPatronal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCompania" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
+          <Property Name="FechaIngreso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaEgreso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
+          <Property Name="DFechaIngreso" Type="DateTime" Precision="0" />
+          <Property Name="DFechaEgreso" Type="DateTime" Precision="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ESEModelStoreContainer" CdmEntityContainer="ESEEntities">
+          <EntitySetMapping Name="Administradores">
+            <EntityTypeMapping TypeName="ESEModel.Administradores">
+              <MappingFragment StoreEntitySet="Administradores">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartaIndividual">
+            <EntityTypeMapping TypeName="ESEModel.CartaIndividual">
+              <MappingFragment StoreEntitySet="CartaIndividual">
+                <ScalarProperty Name="IdCartaIndividual" ColumnName="IdCartaIndividual" />
+                <ScalarProperty Name="IdRegistroPatronal" ColumnName="IdRegistroPatronal" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contactos">
+            <EntityTypeMapping TypeName="ESEModel.Contactos">
+              <MappingFragment StoreEntitySet="Contactos">
+                <ScalarProperty Name="IdContacto" ColumnName="IdContacto" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas">
+            <EntityTypeMapping TypeName="ESEModel.Empresas">
+              <MappingFragment StoreEntitySet="Empresas">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="CodigoRegistro" ColumnName="CodigoRegistro" />
+                <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpresasFacturar">
+            <EntityTypeMapping TypeName="ESEModel.EmpresasFacturar">
+              <MappingFragment StoreEntitySet="EmpresasFacturar">
+                <ScalarProperty Name="IdEmpresaFacturar" ColumnName="IdEmpresaFacturar" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="UsoCFDI" ColumnName="UsoCFDI" />
+                <ScalarProperty Name="MetodoPago" ColumnName="MetodoPago" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estatus">
+            <EntityTypeMapping TypeName="ESEModel.Estatus">
+              <MappingFragment StoreEntitySet="Estatus">
+                <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Imss">
+            <EntityTypeMapping TypeName="ESEModel.Imss">
+              <MappingFragment StoreEntitySet="Imss">
+                <ScalarProperty Name="IdImss" ColumnName="IdImss" />
+                <ScalarProperty Name="IdRegistroPatronal" ColumnName="IdRegistroPatronal" />
+                <ScalarProperty Name="ReportadoPorCandidato" ColumnName="ReportadoPorCandidato" />
+                <ScalarProperty Name="NombreDioReferencias" ColumnName="NombreDioReferencias" />
+                <ScalarProperty Name="PuestoDeQuienDioReferencias" ColumnName="PuestoDeQuienDioReferencias" />
+                <ScalarProperty Name="TelefonoDeQuienDioReferencias" ColumnName="TelefonoDeQuienDioReferencias" />
+                <ScalarProperty Name="EmailDeQuienDioReferencias" ColumnName="EmailDeQuienDioReferencias" />
+                <ScalarProperty Name="MotivoSalida" ColumnName="MotivoSalida" />
+                <ScalarProperty Name="PuestoInicial" ColumnName="PuestoInicial" />
+                <ScalarProperty Name="PuestoFinal" ColumnName="PuestoFinal" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="PertenecioSindicato" ColumnName="PertenecioSindicato" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parametros">
+            <EntityTypeMapping TypeName="ESEModel.Parametros">
+              <MappingFragment StoreEntitySet="Parametros">
+                <ScalarProperty Name="IdParametro" ColumnName="IdParametro" />
+                <ScalarProperty Name="HoraCorteAtencion" ColumnName="HoraCorteAtencion" />
+                <ScalarProperty Name="CorreoParaEnvio" ColumnName="CorreoParaEnvio" />
+                <ScalarProperty Name="CorreoContrasena" ColumnName="CorreoContrasena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="ESEModel.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReferenciasLaborales">
+            <EntityTypeMapping TypeName="ESEModel.ReferenciasLaborales">
+              <MappingFragment StoreEntitySet="ReferenciasLaborales">
+                <ScalarProperty Name="IdReferenciaLaboral" ColumnName="IdReferenciaLaboral" />
+                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+                <ScalarProperty Name="FechaAnteriorIngreso" ColumnName="FechaAnteriorIngreso" />
+                <ScalarProperty Name="FamiliaenEmpresa" ColumnName="FamiliaenEmpresa" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+                <ScalarProperty Name="FechaAnteriorEgreso" ColumnName="FechaAnteriorEgreso" />
+                <ScalarProperty Name="TrabajoAntesEmpresa" ColumnName="TrabajoAntesEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReferenciasLaboralesD">
+            <EntityTypeMapping TypeName="ESEModel.ReferenciasLaboralesD">
+              <MappingFragment StoreEntitySet="ReferenciasLaboralesD">
+                <ScalarProperty Name="IdReferenciaLaboralD" ColumnName="IdReferenciaLaboralD" />
+                <ScalarProperty Name="IdReferenciaLaboral" ColumnName="IdReferenciaLaboral" />
+                <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="Outsourcing" ColumnName="Outsourcing" />
+                <ScalarProperty Name="MarcaAsignada" ColumnName="MarcaAsignada" />
+                <ScalarProperty Name="GiroEmpresa" ColumnName="GiroEmpresa" />
+                <ScalarProperty Name="DomicilioLaboral" ColumnName="DomicilioLaboral" />
+                <ScalarProperty Name="PuestoDesempeñado" ColumnName="PuestoDesempeñado" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+                <ScalarProperty Name="MotivoSalida" ColumnName="MotivoSalida" />
+                <ScalarProperty Name="CartaRecomendacion" ColumnName="CartaRecomendacion" />
+                <ScalarProperty Name="JefeInmediato" ColumnName="JefeInmediato" />
+                <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistrosPatronales">
+            <EntityTypeMapping TypeName="ESEModel.RegistrosPatronales">
+              <MappingFragment StoreEntitySet="RegistrosPatronales">
+                <ScalarProperty Name="IdRegistroPatronal" ColumnName="IdRegistroPatronal" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+                <ScalarProperty Name="RegistroPatronal" ColumnName="RegistroPatronal" />
+                <ScalarProperty Name="NombreCompania" ColumnName="NombreCompania" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitudes">
+            <EntityTypeMapping TypeName="ESEModel.Solicitudes">
+              <MappingFragment StoreEntitySet="Solicitudes">
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ApellidoPatermo" ColumnName="ApellidoPatermo" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="IMSS" ColumnName="IMSS" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="TelefonoCasa" ColumnName="TelefonoCasa" />
+                <ScalarProperty Name="TelefonoRecados" ColumnName="TelefonoRecados" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NumExterior" ColumnName="NumExterior" />
+                <ScalarProperty Name="NumInterior" ColumnName="NumInterior" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="AlcaldiaMunicipio" ColumnName="AlcaldiaMunicipio" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="IdEmpresaFacturar" ColumnName="IdEmpresaFacturar" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="UploadFileName" ColumnName="UploadFileName" />
+                <ScalarProperty Name="FechaCaptura" ColumnName="FechaCaptura" />
+                <ScalarProperty Name="FechaAtencion" ColumnName="FechaAtencion" />
+                <ScalarProperty Name="IdUsuarioRegistro" ColumnName="IdUsuarioRegistro" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="ImssFile" ColumnName="ImssFile" />
+                <ScalarProperty Name="emailCandidato" ColumnName="emailCandidato" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="SolicitadoPor" ColumnName="SolicitadoPor" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="FaceBook" ColumnName="FaceBook" />
+                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="SueldoAspirado" ColumnName="SueldoAspirado" />
+                <ScalarProperty Name="TiempoEstimadoTraslado" ColumnName="TiempoEstimadoTraslado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SolicitudesArchivos">
+            <EntityTypeMapping TypeName="ESEModel.SolicitudesArchivos">
+              <MappingFragment StoreEntitySet="SolicitudesArchivos">
+                <ScalarProperty Name="IdSolicitudArchivo" ColumnName="IdSolicitudArchivo" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+                <ScalarProperty Name="AvisoPrivacidad" ColumnName="AvisoPrivacidad" />
+                <ScalarProperty Name="INE" ColumnName="INE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="ESEModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductosEmpresas">
+            <EntityTypeMapping TypeName="ESEModel.ProductosEmpresas">
+              <MappingFragment StoreEntitySet="ProductosEmpresas">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vContactos">
+            <EntityTypeMapping TypeName="ESEModel.vContactos">
+              <MappingFragment StoreEntitySet="vContactos">
+                <ScalarProperty Name="IdContacto" ColumnName="IdContacto" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vEmpresas">
+            <EntityTypeMapping TypeName="ESEModel.vEmpresas">
+              <MappingFragment StoreEntitySet="vEmpresas">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="CodigoRegistro" ColumnName="CodigoRegistro" />
+                <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vEmpresasFacturar">
+            <EntityTypeMapping TypeName="ESEModel.vEmpresasFacturar">
+              <MappingFragment StoreEntitySet="vEmpresasFacturar">
+                <ScalarProperty Name="IdEmpresaFacturar" ColumnName="IdEmpresaFacturar" />
+                <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vProductos">
+            <EntityTypeMapping TypeName="ESEModel.vProductos">
+              <MappingFragment StoreEntitySet="vProductos">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vProductosEmpresas">
+            <EntityTypeMapping TypeName="ESEModel.vProductosEmpresas">
+              <MappingFragment StoreEntitySet="vProductosEmpresas">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vReferenciasLaborales">
+            <EntityTypeMapping TypeName="ESEModel.vReferenciasLaborales">
+              <MappingFragment StoreEntitySet="vReferenciasLaborales">
+                <ScalarProperty Name="IdReferenciaLaboral" ColumnName="IdReferenciaLaboral" />
+                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+                <ScalarProperty Name="FechaAnteriorIngreso" ColumnName="FechaAnteriorIngreso" />
+                <ScalarProperty Name="FamiliaenEmpresa" ColumnName="FamiliaenEmpresa" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+                <ScalarProperty Name="FechaAnteriorEgreso" ColumnName="FechaAnteriorEgreso" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TrabajoAntesEmpresa" ColumnName="TrabajoAntesEmpresa" />
+                <ScalarProperty Name="IdReferenciaLaboralD" ColumnName="IdReferenciaLaboralD" />
+                <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="Outsourcing" ColumnName="Outsourcing" />
+                <ScalarProperty Name="GiroEmpresa" ColumnName="GiroEmpresa" />
+                <ScalarProperty Name="MarcaAsignada" ColumnName="MarcaAsignada" />
+                <ScalarProperty Name="DomicilioLaboral" ColumnName="DomicilioLaboral" />
+                <ScalarProperty Name="PuestoDesempeñado" ColumnName="PuestoDesempeñado" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+                <ScalarProperty Name="MotivoSalida" ColumnName="MotivoSalida" />
+                <ScalarProperty Name="CartaRecomendacion" ColumnName="CartaRecomendacion" />
+                <ScalarProperty Name="JefeInmediato" ColumnName="JefeInmediato" />
+                <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
+                <ScalarProperty Name="ObservacionesD" ColumnName="ObservacionesD" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="IMSS" ColumnName="IMSS" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="TelefonoCasa" ColumnName="TelefonoCasa" />
+                <ScalarProperty Name="NumExterior" ColumnName="NumExterior" />
+                <ScalarProperty Name="NumInterior" ColumnName="NumInterior" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="AlcaldiaMunicipio" ColumnName="AlcaldiaMunicipio" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="emailCandidato" ColumnName="emailCandidato" />
+                <ScalarProperty Name="Nombre_Empresa_a_Laborar" ColumnName="Nombre Empresa a Laborar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vReferenciasLaboralesD">
+            <EntityTypeMapping TypeName="ESEModel.vReferenciasLaboralesD">
+              <MappingFragment StoreEntitySet="vReferenciasLaboralesD">
+                <ScalarProperty Name="IdReferenciaLaboralD" ColumnName="IdReferenciaLaboralD" />
+                <ScalarProperty Name="IdReferenciaLaboral" ColumnName="IdReferenciaLaboral" />
+                <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="Outsourcing" ColumnName="Outsourcing" />
+                <ScalarProperty Name="MarcaAsignada" ColumnName="MarcaAsignada" />
+                <ScalarProperty Name="GiroEmpresa" ColumnName="GiroEmpresa" />
+                <ScalarProperty Name="DomicilioLaboral" ColumnName="DomicilioLaboral" />
+                <ScalarProperty Name="PuestoDesempeñado" ColumnName="PuestoDesempeñado" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+                <ScalarProperty Name="MotivoSalida" ColumnName="MotivoSalida" />
+                <ScalarProperty Name="CartaRecomendacion" ColumnName="CartaRecomendacion" />
+                <ScalarProperty Name="JefeInmediato" ColumnName="JefeInmediato" />
+                <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vRegistrosPatronales">
+            <EntityTypeMapping TypeName="ESEModel.vRegistrosPatronales">
+              <MappingFragment StoreEntitySet="vRegistrosPatronales">
+                <ScalarProperty Name="IdRegistroPatronal" ColumnName="IdRegistroPatronal" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+                <ScalarProperty Name="RegistroPatronal" ColumnName="RegistroPatronal" />
+                <ScalarProperty Name="NombreCompania" ColumnName="NombreCompania" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vSolicitudes">
+            <EntityTypeMapping TypeName="ESEModel.vSolicitudes">
+              <MappingFragment StoreEntitySet="vSolicitudes">
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+                <ScalarProperty Name="Candidato" ColumnName="Candidato" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
+                <ScalarProperty Name="FechaCaptura" ColumnName="FechaCaptura" />
+                <ScalarProperty Name="FechaAtencion" ColumnName="FechaAtencion" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="IMSS" ColumnName="IMSS" />
+                <ScalarProperty Name="ImssFile" ColumnName="ImssFile" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="emailCandidato" ColumnName="emailCandidato" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vUsuarios">
+            <EntityTypeMapping TypeName="ESEModel.vUsuarios">
+              <MappingFragment StoreEntitySet="vUsuarios">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pActualizaAdministradores" FunctionName="ESEModel.Store.pActualizaAdministradores" />
+          <FunctionImportMapping FunctionImportName="pActualizaCRFile" FunctionName="ESEModel.Store.pActualizaCRFile" />
+          <FunctionImportMapping FunctionImportName="pActualizaImssFile" FunctionName="ESEModel.Store.pActualizaImssFile" />
+          <FunctionImportMapping FunctionImportName="pActualizaProductosEmpresas" FunctionName="ESEModel.Store.pActualizaProductosEmpresas" />
+          <FunctionImportMapping FunctionImportName="pBorraProductosEmpresas" FunctionName="ESEModel.Store.pBorraProductosEmpresas" />
+          <FunctionImportMapping FunctionImportName="pDesactivaEmpresa" FunctionName="ESEModel.Store.pDesactivaEmpresa" />
+          <FunctionImportMapping FunctionImportName="pDesactivaProductos" FunctionName="ESEModel.Store.pDesactivaProductos" />
+          <FunctionImportMapping FunctionImportName="pEliminaRegistrosPatronales" FunctionName="ESEModel.Store.pEliminaRegistrosPatronales" />
+          <FunctionImportMapping FunctionImportName="pInsertaAdministradores" FunctionName="ESEModel.Store.pInsertaAdministradores" />
+          <FunctionImportMapping FunctionImportName="pInsertaCartaIndividual" FunctionName="ESEModel.Store.pInsertaCartaIndividual" />
+          <FunctionImportMapping FunctionImportName="pInsertaEmpresas" FunctionName="ESEModel.Store.pInsertaEmpresas" />
+          <FunctionImportMapping FunctionImportName="pInsertaEmpresasFacturar" FunctionName="ESEModel.Store.pInsertaEmpresasFacturar" />
+          <FunctionImportMapping FunctionImportName="pInsertaProductos" FunctionName="ESEModel.Store.pInsertaProductos" />
+          <FunctionImportMapping FunctionImportName="pInsertaProductosEmpresas" FunctionName="ESEModel.Store.pInsertaProductosEmpresas" />
+          <FunctionImportMapping FunctionImportName="pInsertaReferenciasLaborales" FunctionName="ESEModel.Store.pInsertaReferenciasLaborales" />
+          <FunctionImportMapping FunctionImportName="pInsertaReferenciasLaboralesD" FunctionName="ESEModel.Store.pInsertaReferenciasLaboralesD" />
+          <FunctionImportMapping FunctionImportName="pInsertaRegistrosPatronales" FunctionName="ESEModel.Store.pInsertaRegistrosPatronales" />
+          <FunctionImportMapping FunctionImportName="pInsertaSolicitudes" FunctionName="ESEModel.Store.pInsertaSolicitudes" />
+          <FunctionImportMapping FunctionImportName="pInsertaSolicitudesArchivos" FunctionName="ESEModel.Store.pInsertaSolicitudesArchivos" />
+          <FunctionImportMapping FunctionImportName="pInsertaUsuarios" FunctionName="ESEModel.Store.pInsertaUsuarios" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ESEModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ESEModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ESEModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ESEModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ESEModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ESEModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ESEModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ESEModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ESEModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="vCartaIndividual">
+            <EntityTypeMapping TypeName="ESEModel.vCartaIndividual">
+              <MappingFragment StoreEntitySet="vCartaIndividual">
+                <ScalarProperty Name="DFechaEgreso" ColumnName="DFechaEgreso" />
+                <ScalarProperty Name="DFechaIngreso" ColumnName="DFechaIngreso" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+                <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="NombreCompania" ColumnName="NombreCompania" />
+                <ScalarProperty Name="RegistroPatronal" ColumnName="RegistroPatronal" />
+                <ScalarProperty Name="IdRegistroPatronal" ColumnName="IdRegistroPatronal" />
+                <ScalarProperty Name="IdCartaIndividual" ColumnName="IdCartaIndividual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

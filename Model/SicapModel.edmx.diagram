@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4b38916a58464c90a2f8a91f5f42dbf0" Name="Diagram1">
+        <EntityTypeShape EntityType="ESEModel.Administradores" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.CartaIndividual" Width="1.5" PointX="12" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.Contactos" Width="1.5" PointX="5.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.Empresas" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.EmpresasFacturar" Width="1.5" PointX="5.25" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.Estatus" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.Imss" Width="1.5" PointX="12" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.Parametros" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.Productos" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.ReferenciasLaborales" Width="1.5" PointX="9.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.ReferenciasLaboralesD" Width="1.5" PointX="12" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.RegistrosPatronales" Width="1.5" PointX="9.75" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.Solicitudes" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.SolicitudesArchivos" Width="1.5" PointX="9.75" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.Usuarios" Width="1.5" PointX="10.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.ProductosEmpresas" Width="1.5" PointX="10.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.vContactos" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.vEmpresas" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.vEmpresasFacturar" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.vProductos" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.vProductosEmpresas" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.vReferenciasLaborales" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.vReferenciasLaboralesD" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.vRegistrosPatronales" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.vSolicitudes" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESEModel.vUsuarios" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ESEModel.FK_Administradores_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_Administradores_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_CartaIndividual_RegistrosPatronales" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_Contactos_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_Empresas_Estatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_EmpresasFacturar_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_ProductosEmpresas_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_Solicitudes_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_Usuarios_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_Solicitudes_EmpresasFacturar" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_Productos_Estatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_Solicitudes_Estatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_Usuarios_Estatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_Imss_RegistrosPatronales" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_ProductosEmpresas_Productos" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_Solicitudes_Productos" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_ReferenciasLaborales_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_ReferenciasLaboralesD_ReferenciasLaborales" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_RegistrosPatronales_Solicitudes" ManuallyRouted="false" />
+        <AssociationConnector Association="ESEModel.FK_SolicitudesArchivos_Solicitudes" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ESEModel.vCartaIndividual" Width="1.5" PointX="5.375" PointY="8.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

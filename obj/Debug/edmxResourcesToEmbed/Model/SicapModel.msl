@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ESEModelStoreContainer" CdmEntityContainer="ESEEntities">
+    <EntitySetMapping Name="Administradores">
+      <EntityTypeMapping TypeName="ESEModel.Administradores">
+        <MappingFragment StoreEntitySet="Administradores">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CartaIndividual">
+      <EntityTypeMapping TypeName="ESEModel.CartaIndividual">
+        <MappingFragment StoreEntitySet="CartaIndividual">
+          <ScalarProperty Name="IdCartaIndividual" ColumnName="IdCartaIndividual" />
+          <ScalarProperty Name="IdRegistroPatronal" ColumnName="IdRegistroPatronal" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contactos">
+      <EntityTypeMapping TypeName="ESEModel.Contactos">
+        <MappingFragment StoreEntitySet="Contactos">
+          <ScalarProperty Name="IdContacto" ColumnName="IdContacto" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empresas">
+      <EntityTypeMapping TypeName="ESEModel.Empresas">
+        <MappingFragment StoreEntitySet="Empresas">
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+          <ScalarProperty Name="CodigoRegistro" ColumnName="CodigoRegistro" />
+          <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmpresasFacturar">
+      <EntityTypeMapping TypeName="ESEModel.EmpresasFacturar">
+        <MappingFragment StoreEntitySet="EmpresasFacturar">
+          <ScalarProperty Name="IdEmpresaFacturar" ColumnName="IdEmpresaFacturar" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="RFC" ColumnName="RFC" />
+          <ScalarProperty Name="UsoCFDI" ColumnName="UsoCFDI" />
+          <ScalarProperty Name="MetodoPago" ColumnName="MetodoPago" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estatus">
+      <EntityTypeMapping TypeName="ESEModel.Estatus">
+        <MappingFragment StoreEntitySet="Estatus">
+          <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Imss">
+      <EntityTypeMapping TypeName="ESEModel.Imss">
+        <MappingFragment StoreEntitySet="Imss">
+          <ScalarProperty Name="IdImss" ColumnName="IdImss" />
+          <ScalarProperty Name="IdRegistroPatronal" ColumnName="IdRegistroPatronal" />
+          <ScalarProperty Name="ReportadoPorCandidato" ColumnName="ReportadoPorCandidato" />
+          <ScalarProperty Name="NombreDioReferencias" ColumnName="NombreDioReferencias" />
+          <ScalarProperty Name="PuestoDeQuienDioReferencias" ColumnName="PuestoDeQuienDioReferencias" />
+          <ScalarProperty Name="TelefonoDeQuienDioReferencias" ColumnName="TelefonoDeQuienDioReferencias" />
+          <ScalarProperty Name="EmailDeQuienDioReferencias" ColumnName="EmailDeQuienDioReferencias" />
+          <ScalarProperty Name="MotivoSalida" ColumnName="MotivoSalida" />
+          <ScalarProperty Name="PuestoInicial" ColumnName="PuestoInicial" />
+          <ScalarProperty Name="PuestoFinal" ColumnName="PuestoFinal" />
+          <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+          <ScalarProperty Name="PertenecioSindicato" ColumnName="PertenecioSindicato" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parametros">
+      <EntityTypeMapping TypeName="ESEModel.Parametros">
+        <MappingFragment StoreEntitySet="Parametros">
+          <ScalarProperty Name="IdParametro" ColumnName="IdParametro" />
+          <ScalarProperty Name="HoraCorteAtencion" ColumnName="HoraCorteAtencion" />
+          <ScalarProperty Name="CorreoParaEnvio" ColumnName="CorreoParaEnvio" />
+          <ScalarProperty Name="CorreoContrasena" ColumnName="CorreoContrasena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Productos">
+      <EntityTypeMapping TypeName="ESEModel.Productos">
+        <MappingFragment StoreEntitySet="Productos">
+          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReferenciasLaborales">
+      <EntityTypeMapping TypeName="ESEModel.ReferenciasLaborales">
+        <MappingFragment StoreEntitySet="ReferenciasLaborales">
+          <ScalarProperty Name="IdReferenciaLaboral" ColumnName="IdReferenciaLaboral" />
+          <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+          <ScalarProperty Name="FechaAnteriorIngreso" ColumnName="FechaAnteriorIngreso" />
+          <ScalarProperty Name="FamiliaenEmpresa" ColumnName="FamiliaenEmpresa" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+          <ScalarProperty Name="FechaAnteriorEgreso" ColumnName="FechaAnteriorEgreso" />
+          <ScalarProperty Name="TrabajoAntesEmpresa" ColumnName="TrabajoAntesEmpresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReferenciasLaboralesD">
+      <EntityTypeMapping TypeName="ESEModel.ReferenciasLaboralesD">
+        <MappingFragment StoreEntitySet="ReferenciasLaboralesD">
+          <ScalarProperty Name="IdReferenciaLaboralD" ColumnName="IdReferenciaLaboralD" />
+          <ScalarProperty Name="IdReferenciaLaboral" ColumnName="IdReferenciaLaboral" />
+          <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
+          <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+          <ScalarProperty Name="Outsourcing" ColumnName="Outsourcing" />
+          <ScalarProperty Name="MarcaAsignada" ColumnName="MarcaAsignada" />
+          <ScalarProperty Name="GiroEmpresa" ColumnName="GiroEmpresa" />
+          <ScalarProperty Name="DomicilioLaboral" ColumnName="DomicilioLaboral" />
+          <ScalarProperty Name="PuestoDesempeñado" ColumnName="PuestoDesempeñado" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+          <ScalarProperty Name="MotivoSalida" ColumnName="MotivoSalida" />
+          <ScalarProperty Name="CartaRecomendacion" ColumnName="CartaRecomendacion" />
+          <ScalarProperty Name="JefeInmediato" ColumnName="JefeInmediato" />
+          <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegistrosPatronales">
+      <EntityTypeMapping TypeName="ESEModel.RegistrosPatronales">
+        <MappingFragment StoreEntitySet="RegistrosPatronales">
+          <ScalarProperty Name="IdRegistroPatronal" ColumnName="IdRegistroPatronal" />
+          <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+          <ScalarProperty Name="RegistroPatronal" ColumnName="RegistroPatronal" />
+          <ScalarProperty Name="NombreCompania" ColumnName="NombreCompania" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Solicitudes">
+      <EntityTypeMapping TypeName="ESEModel.Solicitudes">
+        <MappingFragment StoreEntitySet="Solicitudes">
+          <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="ApellidoPatermo" ColumnName="ApellidoPatermo" />
+          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+          <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+          <ScalarProperty Name="CURP" ColumnName="CURP" />
+          <ScalarProperty Name="IMSS" ColumnName="IMSS" />
+          <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+          <ScalarProperty Name="TelefonoCasa" ColumnName="TelefonoCasa" />
+          <ScalarProperty Name="TelefonoRecados" ColumnName="TelefonoRecados" />
+          <ScalarProperty Name="Calle" ColumnName="Calle" />
+          <ScalarProperty Name="NumExterior" ColumnName="NumExterior" />
+          <ScalarProperty Name="NumInterior" ColumnName="NumInterior" />
+          <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+          <ScalarProperty Name="AlcaldiaMunicipio" ColumnName="AlcaldiaMunicipio" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="IdEmpresaFacturar" ColumnName="IdEmpresaFacturar" />
+          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+          <ScalarProperty Name="UploadFileName" ColumnName="UploadFileName" />
+          <ScalarProperty Name="FechaCaptura" ColumnName="FechaCaptura" />
+          <ScalarProperty Name="FechaAtencion" ColumnName="FechaAtencion" />
+          <ScalarProperty Name="IdUsuarioRegistro" ColumnName="IdUsuarioRegistro" />
+          <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+          <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+          <ScalarProperty Name="ImssFile" ColumnName="ImssFile" />
+          <ScalarProperty Name="emailCandidato" ColumnName="emailCandidato" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="SolicitadoPor" ColumnName="SolicitadoPor" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="FaceBook" ColumnName="FaceBook" />
+          <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+          <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+          <ScalarProperty Name="SueldoAspirado" ColumnName="SueldoAspirado" />
+          <ScalarProperty Name="TiempoEstimadoTraslado" ColumnName="TiempoEstimadoTraslado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SolicitudesArchivos">
+      <EntityTypeMapping TypeName="ESEModel.SolicitudesArchivos">
+        <MappingFragment StoreEntitySet="SolicitudesArchivos">
+          <ScalarProperty Name="IdSolicitudArchivo" ColumnName="IdSolicitudArchivo" />
+          <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+          <ScalarProperty Name="AvisoPrivacidad" ColumnName="AvisoPrivacidad" />
+          <ScalarProperty Name="INE" ColumnName="INE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="ESEModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductosEmpresas">
+      <EntityTypeMapping TypeName="ESEModel.ProductosEmpresas">
+        <MappingFragment StoreEntitySet="ProductosEmpresas">
+          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vContactos">
+      <EntityTypeMapping TypeName="ESEModel.vContactos">
+        <MappingFragment StoreEntitySet="vContactos">
+          <ScalarProperty Name="IdContacto" ColumnName="IdContacto" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vEmpresas">
+      <EntityTypeMapping TypeName="ESEModel.vEmpresas">
+        <MappingFragment StoreEntitySet="vEmpresas">
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+          <ScalarProperty Name="CodigoRegistro" ColumnName="CodigoRegistro" />
+          <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vEmpresasFacturar">
+      <EntityTypeMapping TypeName="ESEModel.vEmpresasFacturar">
+        <MappingFragment StoreEntitySet="vEmpresasFacturar">
+          <ScalarProperty Name="IdEmpresaFacturar" ColumnName="IdEmpresaFacturar" />
+          <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
+          <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+          <ScalarProperty Name="RFC" ColumnName="RFC" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vProductos">
+      <EntityTypeMapping TypeName="ESEModel.vProductos">
+        <MappingFragment StoreEntitySet="vProductos">
+          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vProductosEmpresas">
+      <EntityTypeMapping TypeName="ESEModel.vProductosEmpresas">
+        <MappingFragment StoreEntitySet="vProductosEmpresas">
+          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vReferenciasLaborales">
+      <EntityTypeMapping TypeName="ESEModel.vReferenciasLaborales">
+        <MappingFragment StoreEntitySet="vReferenciasLaborales">
+          <ScalarProperty Name="IdReferenciaLaboral" ColumnName="IdReferenciaLaboral" />
+          <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+          <ScalarProperty Name="FechaAnteriorIngreso" ColumnName="FechaAnteriorIngreso" />
+          <ScalarProperty Name="FamiliaenEmpresa" ColumnName="FamiliaenEmpresa" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+          <ScalarProperty Name="FechaAnteriorEgreso" ColumnName="FechaAnteriorEgreso" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="TrabajoAntesEmpresa" ColumnName="TrabajoAntesEmpresa" />
+          <ScalarProperty Name="IdReferenciaLaboralD" ColumnName="IdReferenciaLaboralD" />
+          <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
+          <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+          <ScalarProperty Name="Outsourcing" ColumnName="Outsourcing" />
+          <ScalarProperty Name="GiroEmpresa" ColumnName="GiroEmpresa" />
+          <ScalarProperty Name="MarcaAsignada" ColumnName="MarcaAsignada" />
+          <ScalarProperty Name="DomicilioLaboral" ColumnName="DomicilioLaboral" />
+          <ScalarProperty Name="PuestoDesempeñado" ColumnName="PuestoDesempeñado" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+          <ScalarProperty Name="MotivoSalida" ColumnName="MotivoSalida" />
+          <ScalarProperty Name="CartaRecomendacion" ColumnName="CartaRecomendacion" />
+          <ScalarProperty Name="JefeInmediato" ColumnName="JefeInmediato" />
+          <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
+          <ScalarProperty Name="ObservacionesD" ColumnName="ObservacionesD" />
+          <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+          <ScalarProperty Name="CURP" ColumnName="CURP" />
+          <ScalarProperty Name="IMSS" ColumnName="IMSS" />
+          <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+          <ScalarProperty Name="TelefonoCasa" ColumnName="TelefonoCasa" />
+          <ScalarProperty Name="NumExterior" ColumnName="NumExterior" />
+          <ScalarProperty Name="NumInterior" ColumnName="NumInterior" />
+          <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+          <ScalarProperty Name="Calle" ColumnName="Calle" />
+          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+          <ScalarProperty Name="AlcaldiaMunicipio" ColumnName="AlcaldiaMunicipio" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="emailCandidato" ColumnName="emailCandidato" />
+          <ScalarProperty Name="Nombre_Empresa_a_Laborar" ColumnName="Nombre Empresa a Laborar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vReferenciasLaboralesD">
+      <EntityTypeMapping TypeName="ESEModel.vReferenciasLaboralesD">
+        <MappingFragment StoreEntitySet="vReferenciasLaboralesD">
+          <ScalarProperty Name="IdReferenciaLaboralD" ColumnName="IdReferenciaLaboralD" />
+          <ScalarProperty Name="IdReferenciaLaboral" ColumnName="IdReferenciaLaboral" />
+          <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
+          <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+          <ScalarProperty Name="Outsourcing" ColumnName="Outsourcing" />
+          <ScalarProperty Name="MarcaAsignada" ColumnName="MarcaAsignada" />
+          <ScalarProperty Name="GiroEmpresa" ColumnName="GiroEmpresa" />
+          <ScalarProperty Name="DomicilioLaboral" ColumnName="DomicilioLaboral" />
+          <ScalarProperty Name="PuestoDesempeñado" ColumnName="PuestoDesempeñado" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+          <ScalarProperty Name="MotivoSalida" ColumnName="MotivoSalida" />
+          <ScalarProperty Name="CartaRecomendacion" ColumnName="CartaRecomendacion" />
+          <ScalarProperty Name="JefeInmediato" ColumnName="JefeInmediato" />
+          <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vRegistrosPatronales">
+      <EntityTypeMapping TypeName="ESEModel.vRegistrosPatronales">
+        <MappingFragment StoreEntitySet="vRegistrosPatronales">
+          <ScalarProperty Name="IdRegistroPatronal" ColumnName="IdRegistroPatronal" />
+          <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+          <ScalarProperty Name="RegistroPatronal" ColumnName="RegistroPatronal" />
+          <ScalarProperty Name="NombreCompania" ColumnName="NombreCompania" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vSolicitudes">
+      <EntityTypeMapping TypeName="ESEModel.vSolicitudes">
+        <MappingFragment StoreEntitySet="vSolicitudes">
+          <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+          <ScalarProperty Name="Candidato" ColumnName="Candidato" />
+          <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+          <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
+          <ScalarProperty Name="FechaCaptura" ColumnName="FechaCaptura" />
+          <ScalarProperty Name="FechaAtencion" ColumnName="FechaAtencion" />
+          <ScalarProperty Name="CURP" ColumnName="CURP" />
+          <ScalarProperty Name="IMSS" ColumnName="IMSS" />
+          <ScalarProperty Name="ImssFile" ColumnName="ImssFile" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="emailCandidato" ColumnName="emailCandidato" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vUsuarios">
+      <EntityTypeMapping TypeName="ESEModel.vUsuarios">
+        <MappingFragment StoreEntitySet="vUsuarios">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+          <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="pActualizaAdministradores" FunctionName="ESEModel.Store.pActualizaAdministradores" />
+    <FunctionImportMapping FunctionImportName="pActualizaCRFile" FunctionName="ESEModel.Store.pActualizaCRFile" />
+    <FunctionImportMapping FunctionImportName="pActualizaImssFile" FunctionName="ESEModel.Store.pActualizaImssFile" />
+    <FunctionImportMapping FunctionImportName="pActualizaProductosEmpresas" FunctionName="ESEModel.Store.pActualizaProductosEmpresas" />
+    <FunctionImportMapping FunctionImportName="pBorraProductosEmpresas" FunctionName="ESEModel.Store.pBorraProductosEmpresas" />
+    <FunctionImportMapping FunctionImportName="pDesactivaEmpresa" FunctionName="ESEModel.Store.pDesactivaEmpresa" />
+    <FunctionImportMapping FunctionImportName="pDesactivaProductos" FunctionName="ESEModel.Store.pDesactivaProductos" />
+    <FunctionImportMapping FunctionImportName="pEliminaRegistrosPatronales" FunctionName="ESEModel.Store.pEliminaRegistrosPatronales" />
+    <FunctionImportMapping FunctionImportName="pInsertaAdministradores" FunctionName="ESEModel.Store.pInsertaAdministradores" />
+    <FunctionImportMapping FunctionImportName="pInsertaCartaIndividual" FunctionName="ESEModel.Store.pInsertaCartaIndividual" />
+    <FunctionImportMapping FunctionImportName="pInsertaEmpresas" FunctionName="ESEModel.Store.pInsertaEmpresas" />
+    <FunctionImportMapping FunctionImportName="pInsertaEmpresasFacturar" FunctionName="ESEModel.Store.pInsertaEmpresasFacturar" />
+    <FunctionImportMapping FunctionImportName="pInsertaProductos" FunctionName="ESEModel.Store.pInsertaProductos" />
+    <FunctionImportMapping FunctionImportName="pInsertaProductosEmpresas" FunctionName="ESEModel.Store.pInsertaProductosEmpresas" />
+    <FunctionImportMapping FunctionImportName="pInsertaReferenciasLaborales" FunctionName="ESEModel.Store.pInsertaReferenciasLaborales" />
+    <FunctionImportMapping FunctionImportName="pInsertaReferenciasLaboralesD" FunctionName="ESEModel.Store.pInsertaReferenciasLaboralesD" />
+    <FunctionImportMapping FunctionImportName="pInsertaRegistrosPatronales" FunctionName="ESEModel.Store.pInsertaRegistrosPatronales" />
+    <FunctionImportMapping FunctionImportName="pInsertaSolicitudes" FunctionName="ESEModel.Store.pInsertaSolicitudes" />
+    <FunctionImportMapping FunctionImportName="pInsertaSolicitudesArchivos" FunctionName="ESEModel.Store.pInsertaSolicitudesArchivos" />
+    <FunctionImportMapping FunctionImportName="pInsertaUsuarios" FunctionName="ESEModel.Store.pInsertaUsuarios" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ESEModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ESEModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ESEModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ESEModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ESEModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ESEModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ESEModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ESEModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ESEModel.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="vCartaIndividual">
+      <EntityTypeMapping TypeName="ESEModel.vCartaIndividual">
+        <MappingFragment StoreEntitySet="vCartaIndividual">
+          <ScalarProperty Name="DFechaEgreso" ColumnName="DFechaEgreso" />
+          <ScalarProperty Name="DFechaIngreso" ColumnName="DFechaIngreso" />
+          <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+          <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="NombreCompania" ColumnName="NombreCompania" />
+          <ScalarProperty Name="RegistroPatronal" ColumnName="RegistroPatronal" />
+          <ScalarProperty Name="IdRegistroPatronal" ColumnName="IdRegistroPatronal" />
+          <ScalarProperty Name="IdCartaIndividual" ColumnName="IdCartaIndividual" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
