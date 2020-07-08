@@ -50,6 +50,7 @@ namespace ImssAnalysis
             {
                 w.Write(iListRegistrosPatronales1);
             }
+	    Log.write(ex.message);
             MessageBox.Show("Ha concluido la carga del archivo.");
 
 
